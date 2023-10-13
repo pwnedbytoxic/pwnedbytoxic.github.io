@@ -23,8 +23,9 @@ PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p
       <pubDate>Sun, 08 Oct 2023 14:55:42 -0400</pubDate>
       
       <guid>https://pwnedbytoxic.github.io/posts/welcome/</guid>
-      <description>Welcome to tox@box - Your Cybersecurity Playground Welcome to tox@box, your personal cybersecurity playground where we unravel the mysteries of the digital world and empower you with the knowledge you need to stay secure.
-About tox@box At tox@box, I&amp;rsquo;m on a mission to make the internet a safer place, one byte at a time. I&amp;rsquo;m Damon Hoody (aka &amp;ldquo;toxic&amp;rdquo;), your host, and guide through the exciting and ever-evolving landscape of cybersecurity.</description>
+      <description>Welcome to tox@box Welcome to tox@box, my personal blog and writeup library wherein we will explore &amp;amp; expose the vast knowledge pool of cybersecurity.
+About tox@box At tox@box, I&amp;rsquo;m on a mission to make the internet a safer place, one byte at a time. I&amp;rsquo;m Damon Hoody (aka &amp;ldquo;toxic&amp;rdquo;), your host, and guide through the exciting and ever-evolving landscape of cybersecurity.
+What is Cybersecurity? Cybersecurity is the practice of protecting digital systems, networks, and data from malicious attacks, unauthorized access, and data breaches.</description>
     </item>
     
   </channel>
