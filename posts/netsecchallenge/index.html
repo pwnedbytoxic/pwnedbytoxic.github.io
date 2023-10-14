@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>THM Writeup | Net Sec Challenge &ndash; tox@box</title>
+<meta name="description" content="A driven 16 y/o [infosec](https://tryhackme.com/p/toxic.sec) student from ohio looking for new opportunities to learn and grow :&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/palettes/windows-95.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/risotto.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/custom.css">
+
+
+<link rel="icon" href="https://pwnedbytoxic.github.io/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://pwnedbytoxic.github.io/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>THM Writeup | Net Sec Challenge</h1>
+    </header>
+    
+    <div class="content__body">
+        <h2 id="introductionoverview">Introduction/Overview</h2>
+<ul>
+<li>
+<p><strong>Challenge Name:</strong> <a href="https://tryhackme.com/room/netsecchallenge">Net Sec Challenge</a></p>
+</li>
+<li>
+<p><strong>Description:</strong> Basic Enumeration of a box, meant as practice of Network Security concepts. Completed only using nmap &amp; hydra.</p>
+</li>
+<li>
+<p><strong>IP Address:</strong> 10.10.57.45 (Example)</p>
+</li>
+</ul>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li><strong>Web Application:</strong>
+<ul>
+<li>URL: http://10.10.57.45 (Example)</li>
+</ul>
+</li>
+<li><strong>Vulnerabilities:</strong>
+<ul>
+<li>Identify any potential vulnerabilities or misconfigurations.</li>
+</ul>
+</li>
+</ul>
+<p><strong>[Question 1.1] Launch the AttackBox and the target VM.</strong></p>
+<ul>
+<li>No answer needed, simply click the button</li>
+</ul>
+<hr>
+<p><strong>[Question 2.1] What is the highest port number being open less than 10,000?</strong></p>
+<p>Well, after using <code>nmap -p- 10.10.57.45</code>, we find quite a few ports open, many of which with unusual port numbers associated. Results of the scan are below.</p>
+<pre tabindex="0"><code>PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+8080/tcp  open  http-proxy
+10021/tcp open  unknown
+</code></pre><p>Those with a keen eye would notice that the peculiar service on 10021 isn&rsquo;t assigned a service. To fix this, we run <code>nmap -p 10021 10.10.57.45 -A</code> to gain a comprehensive understanding of the underlying system services.</p>
+<pre tabindex="0"><code>PORT      STATE SERVICE VERSION
+10021/tcp open  ftp     vsftpd 3.0.3
+Service Info: OS: Unix
+</code></pre><p>With this, we can answer the first 3 questions in task 2 as well as <strong>[Question 2.6]</strong>.</p>
+<hr>
+<p>As for <strong>Question 2.4</strong>, this can be found either with an nmap scan on port 80, or manual enumeration on the website. Developer Tools gives us the following result.</p>
+<p><img src="devtools.PNG" alt="DevTools"></p>
+<p><strong>[Question 2.5] What is the flag hidden in the SSH server header?</strong></p>
+<p>Much like the other services, we can find this flag with a quick nmap scan <code>nmap -p 22 10.10.57.45 -A</code> which produces the following (flag is dashed out) &ndash;</p>
+<pre tabindex="0"><code>PORT   STATE SERVICE VERSION
+22/tcp open  ssh     (protocol 2.0)
+| fingerprint-strings: 
+|   NULL: 
+|_    SSH-2.0-OpenSSH_8.2p1 THM{------------}
+| ssh-hostkey: 
+|   3072 da5f69e2111f7c6680896154e87b16f3 (RSA)
+|   256 3f8c0946ab1cdfd73583cf6d6e177e1c (ECDSA)
+|_  256 eda93aaa4c6b16e60d437546fb33b229 (ED25519)
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port22-TCP:V=7.93%I=7%D=10/14%Time=652AE813%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,29,&quot;SSH-2\.0-OpenSSH_8\.2p1\x20THM{------------}\r\n&quot;);
+</code></pre><hr>
+<p><strong>[Question 2.7]</strong> now gives us added context: <code> We learned two usernames using social engineering: eddie and quinn. What is the flag hidden in one of these two account files and accessible via FTP?</code></p>
+<p>In order to answer this question, we must utilize our hydra skills to bruteforce credentials for each user.</p>
+<p>In order to bruteforce ftp logins with hydra, we use <code>hydra -l userlogin -P password-list-adress ftp://----IP--Address -V</code></p>
+<p>In our case, however, we must do this on a specific port, which forces us to use the <code>-s</code> flag. The syntax looks something like this to bruteforce quinn&rsquo;s ftp access &ndash; <code>hydra -l quinn -P /usr/share/wordlists/rockyou.txt ftp://10.10.57.45 -V -s 10021</code></p>
+<p>With this, we gain an ftp shell on the remote server and can <code>less</code> the contents of <code>ftp_flag.txt</code>, which answers <strong>[Question 2.7]</strong>.</p>
+<hr>
+<p>For <strong>[Question 2.8]</strong>, we must take a completly different approach to the box. We are prompted to go to <code>http://10.10.72.243:8080</code> which displays a node.js webpage that prompts us to <code>scan 10.10.57.45 (this machine) as covertly as possible and avoid being detected by the IDS.</code></p>
+<p>The question is prompting us to use a &ldquo;null&rdquo; nmap scan, which is covert in that it identifies listening TCP ports, but cannot verify if they are open or not. In this case, after running <code>sudo nmap -sN 10.10.57.45</code>, we get the final flag of the box.</p>
+<p><img src="netsecchallenge.PNG" alt="NetSecChallenge"></p>
+<hr>
+<p>Happy Hacking!!!</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://pwnedbytoxic.github.io/images/rice.svg" alt="Logo">
+<h1 class="about__title">pwnedbytoxic</h1>
+<p class="about__description">A driven 16 y/o <a href="https://tryhackme.com/p/toxic.sec">infosec</a> student from ohio looking for new opportunities to learn and grow :&gt;</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.instagram.com/damon.hoody/" rel="me" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:hoody.damon@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2023-10-14
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+    
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by toxic //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

@@ -6,7 +6,20 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Oct 2023 23:10:05 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Oct 2023 17:27:51 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>THM Writeup | Net Sec Challenge</title>
+      <link>https://pwnedbytoxic.github.io/posts/netsecchallenge/</link>
+      <pubDate>Sat, 14 Oct 2023 17:27:51 -0400</pubDate>
+      
+      <guid>https://pwnedbytoxic.github.io/posts/netsecchallenge/</guid>
+      <description>Introduction/Overview   Challenge Name: Net Sec Challenge
+  Description: Basic Enumeration of a box, meant as practice of Network Security concepts. Completed only using nmap &amp;amp; hydra.
+  IP Address: 10.10.57.45 (Example)
+  Enumeration  Web Application:  URL: http://10.10.57.45 (Example)   Vulnerabilities:  Identify any potential vulnerabilities or misconfigurations.    [Question 1.1] Launch the AttackBox and the target VM.
+ No answer needed, simply click the button   [Question 2.</description>
+    </item>
+    
     <item>
       <title>Contact</title>
       <link>https://pwnedbytoxic.github.io/contact/</link>
