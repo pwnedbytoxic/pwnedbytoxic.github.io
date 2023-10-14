@@ -98,7 +98,7 @@ Service Info: OS: Unix
 </code></pre><p>With this, we can answer the first 3 questions in task 2 as well as <strong>[Question 2.6]</strong>.</p>
 <hr>
 <p>As for <strong>Question 2.4</strong>, this can be found either with an nmap scan on port 80, or manual enumeration on the website. Developer Tools gives us the following result.</p>
-<p><img src="devtools.PNG" alt="DevTools"></p>
+<p><img src="devtools.jpg" alt="DevTools"></p>
 <p><strong>[Question 2.5] What is the flag hidden in the SSH server header?</strong></p>
 <p>Much like the other services, we can find this flag with a quick nmap scan <code>nmap -p 22 10.10.57.45 -A</code> which produces the following (flag is dashed out) &ndash;</p>
 <pre tabindex="0"><code>PORT   STATE SERVICE VERSION
@@ -122,7 +122,7 @@ SF:L,29,&quot;SSH-2\.0-OpenSSH_8\.2p1\x20THM{------------}\r\n&quot;);
 <hr>
 <p>For <strong>[Question 2.8]</strong>, we must take a completly different approach to the box. We are prompted to go to <code>http://10.10.72.243:8080</code> which displays a node.js webpage that prompts us to <code>scan 10.10.57.45 (this machine) as covertly as possible and avoid being detected by the IDS.</code></p>
 <p>The question is prompting us to use a &ldquo;null&rdquo; nmap scan, which is covert in that it identifies listening TCP ports, but cannot verify if they are open or not. In this case, after running <code>sudo nmap -sN 10.10.57.45</code>, we get the final flag of the box.</p>
-<p><img src="netsecchallenge.PNG" alt="NetSecChallenge"></p>
+<p><img src="netsecchallenge.jpg" alt="NetSecChallenge"></p>
 <hr>
 <p>Happy Hacking!!!</p>
 
