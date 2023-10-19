@@ -1,0 +1,70 @@
+---
+title: "Expose"
+date: 2023-10-15T00:47:04-04:00
+---
+
+## Introduction/Overview
+
+- **Challenge Name:** Expose
+- **My Rating:** Medium
+- **Category:** Linux exploitation
+- **/etc/hosts:** expose.thm
+- **Author:** [1337rce](https://tryhackme.com/p/1337rce)
+- **Description:** Use your red teaming knowledge to pwn a Linux machine.
+
+## Scanning/Recon
+
+As per usual, we start with a broad nmap scan of all ports with `nmap -p- expose.thm`, which returns us something similar to the following:
+
+```
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+53/tcp   open  domain
+1337/tcp open  waste
+1883/tcp open  mqtt
+```
+
+With these services, we may begin directory fuzzing (i use `gobuster`)
+
+## Enumeration
+
+- **Web Application:** 
+  - URL: http://10.10.10.10 (Example)
+  - Technologies: Apache, PHP, etc.
+- **Vulnerabilities:** 
+  - Identify any potential vulnerabilities or misconfigurations.
+
+Discuss your findings during the enumeration phase. This may include web application details, detected vulnerabilities, or anything else that stood out. Mention the technologies in use and any clues that might lead to potential exploits.
+
+## Exploitation
+
+- **Exploitation Method:** (e.g., SQL Injection, Remote Code Execution, etc.)
+- **Steps Taken:**
+  1. Describe the first step of the exploitation process.
+  2. Continue with additional steps as necessary.
+- **Outcome:** Explain the result of each step and the final outcome.
+
+This section is dedicated to explaining how you exploited the discovered vulnerabilities to gain initial access to the system. Provide a detailed walkthrough of the steps taken during the exploitation process.
+
+## Privilege Escalation
+
+- **Initial User:** (e.g., low-privilege user)
+- **Privilege Escalation Method:** (e.g., kernel exploit, sudo rights, etc.)
+- **Steps Taken:**
+  1. Explain the first step of privilege escalation.
+  2. Continue with additional steps as needed.
+- **Outcome:** Describe the final privilege escalation and access to the target.
+
+In this section, document the process of escalating privileges to achieve your ultimate goal, whether it's obtaining root access or reaching a high-privilege user. Provide a step-by-step explanation of each action taken.
+
+## Conclusion
+
+- **Flag:** CTF{flag_here} (if applicable)
+- **Lessons Learned:** Briefly summarize key takeaways and lessons learned during the challenge.
+
+Conclude your writeup by summarizing the results, presenting any flags obtained, and discussing what you've learned from the challenge. Share insights or techniques that were particularly useful or noteworthy.
+
+---
+
+Remember to adjust the content within each section to match the specifics of the CTF challenge you're writing about. Additionally, include relevant command outputs, code snippets, and screenshots as needed to enhance the clarity of your writeup.
