@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>Expose &ndash; tox@box</title>
+<meta name="description" content="A driven 16 y/o [infosec](https://tryhackme.com/p/toxic.sec) student from ohio looking for new opportunities to learn and grow :&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/palettes/windows-95.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/risotto.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/custom.css">
+
+
+<link rel="icon" href="https://pwnedbytoxic.github.io/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://pwnedbytoxic.github.io/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Expose</h1>
+    </header>
+    
+    <div class="content__body">
+        <h2 id="introductionoverview">Introduction/Overview</h2>
+<ul>
+<li><strong>Challenge Name:</strong> Expose</li>
+<li><strong>My Rating:</strong> Medium</li>
+<li><strong>Category:</strong> Linux exploitation</li>
+<li><strong>/etc/hosts:</strong> expose.thm</li>
+<li><strong>Author:</strong> <a href="https://tryhackme.com/p/1337rce">1337rce</a></li>
+<li><strong>Description:</strong> Use your red teaming knowledge to pwn a Linux machine.</li>
+</ul>
+<h2 id="scanningrecon--initial-exploitation">Scanning/Recon &amp; Initial Exploitation</h2>
+<p>As per usual, we start with a broad nmap scan of all ports with <code>nmap -p- expose.thm</code>, which returns us something similar to the following:</p>
+<pre tabindex="0"><code>PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+53/tcp   open  domain
+1337/tcp open  waste
+1883/tcp open  mqtt
+</code></pre><p>After investigating tcp port 1337 with <code>nmap expose.thm -p 1337</code>, we find a webserver. With these services, we may begin directory fuzzing on 1337 (i use <code>gobuster</code>)</p>
+<p>You should get something similar to the following :</p>
+<p><img src="/exposedirbuster.JPG" alt=""></p>
+<p>After visiting both directories, we learn that <code>/admin_101</code> has a login screen with credentials already burnt in. We can test for SQLi (which was luckily my first idea) by passing <code> hacker@root.thm` OR 1=1 --</code> into the username perameter in the browser.</p>
+<hr>
+<p>We are then brought to a new page, which looks to me a lot like the chatgpt interface:</p>
+<p><img src="/exposess.JPG" alt=""></p>
+<p>This was really annoying to play with, but its basically a dead end. Instead, we need to capture the login request and use sqlmap to dump as much info as possible from the page.</p>
+<p>Using burpsuite, I capture the login request, making sure to not touch the password perameter:</p>
+<pre tabindex="0"><code>POST /admin_101/includes/user_login.php HTTP/1.1
+Host: expose.thm:1337
+Content-Length: 37
+Accept: */*
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.107 Safari/537.36
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Origin: http://expose.thm:1337
+Referer: http://expose.thm:1337/admin_101/
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie: PHPSESSID=0h1o5fr4r09h1ph143k48vjni2
+Connection: close
+
+email=hacker%40root.thm&amp;password=test
+</code></pre><p>We then run a quick <code>sqlmap -r burp.txt --dump`` with </code>rockyou.txt` as our dictionary to crack the hases, and get the following info.</p>
+<p><img src="/exposedump.JPG" alt=""></p>
+<p>When we visit <code>/file1010111/index.php</code> and enter the given cracked password, we are prompted to hide DOM elements. I had no idea what they meant by this, so I entered the CTRL+U menu, and found this line commented out in the website code:</p>
+<p><code>Hint: Try file or view as GET parameters?</code></p>
+<p>Big hint there, so I decided to fuzz for lfi with</p>
+<pre tabindex="0"><code>http://expose.thm:1337/file1010111/index.php?file=../../../../../../../etc/passwd
+</code></pre><p>which secured that we have lfi on the machine!</p>
+<p>This also gave us the username for our next exploitation &ndash; <code>zeamkish</code></p>
+<p>At this point, I looked through ftp on port 21 from earlier to find some way to upload a payload, but I forgot about the other section in our dump &ndash; <code>/upload-cv00101011/index.php</code></p>
+<p>Upon visiting this site, we input our new username and are met with an upload portal. Finally!!!</p>
+<p>I upload the pentestmonkey <code>php-reverse-shell.php</code>, but have to rename it to <code>php-reverse-shell.php.png</code> in order to get past the filter. In burpsuite, we change the requested file name back to <code>php-reverse-shell.php</code> and upload. From this point, we can simply <code>rlwrap nc -nvlp (whatever port you chose)</code> and recieve your web shell.</p>
+<h2 id="web-shell--privesc">Web shell / PrivEsc</h2>
+<ul>
+<li><strong>Initial User:</strong> www-data</li>
+</ul>
+<p>Immediately, I try <code>sudo -l</code> to no avail. I found that I have cd permissions to /home, which found me ~/ssh_creds.txt, a text file containing the username &amp; password for the <code>zeamkish</code> user. We can ssh into this, which gives us a quick PE vector into an actual user on the machine.</p>
+<p>Now with zeamkish&rsquo;s permissions, we still don&rsquo;t have <code>sudo -l</code> unfortunately. What we do have, after uploading linpeas into /<code>tmp</code> with <code>python -m http.server</code> on my local machine, is an suid bit on <code>/usr/bin/nano</code>. This allows us to read and write to <code>/etc/shadow</code>!.</p>
+<p>With <code>nano /etc/shadow</code>, we can copy the hash for zeamkish and paste it into the root password. Now, we can <code>su root</code> with the ssh password we got previously from <code>ssh_creds.txt</code>. This took me WAY too long to figure out, but I eventually came up with this method to gain root.</p>
+<p><img src="/exposeroot.JPG" alt=""></p>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Lessons Learned:</strong> In this supposedly easy box, we used industry standard tools such as <code>nmap, hydra, sqlmap, burpsuite, etc</code> in order to get sql injection on the login page, and eventually upload a php web shell which gained us initial exploitation. From here, we leveraged a misconfiguration in GNU nano to read &amp; write to <code>/etc/shadow</code>. This finally gained us a root shell!</li>
+</ul>
+<hr>
+<p>Happy hacking!!!</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://pwnedbytoxic.github.io/images/rice.svg" alt="Logo">
+<h1 class="about__title">pwnedbytoxic</h1>
+<p class="about__description">A driven 16 y/o <a href="https://tryhackme.com/p/toxic.sec">infosec</a> student from ohio looking for new opportunities to learn and grow :&gt;</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.instagram.com/damon.hoody/" rel="me" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:hoody.damon@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2023-10-15
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+    
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by toxic //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

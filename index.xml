@@ -6,7 +6,17 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Oct 2023 17:27:51 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Oct 2023 00:47:04 -0400</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Expose</title>
+      <link>https://pwnedbytoxic.github.io/posts/expose/</link>
+      <pubDate>Sun, 15 Oct 2023 00:47:04 -0400</pubDate>
+      
+      <guid>https://pwnedbytoxic.github.io/posts/expose/</guid>
+      <description>Introduction/Overview  Challenge Name: Expose My Rating: Medium Category: Linux exploitation /etc/hosts: expose.thm Author: 1337rce Description: Use your red teaming knowledge to pwn a Linux machine.  Scanning/Recon &amp;amp; Initial Exploitation As per usual, we start with a broad nmap scan of all ports with nmap -p- expose.thm, which returns us something similar to the following:
+PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp open waste 1883/tcp open mqtt After investigating tcp port 1337 with nmap expose.</description>
+    </item>
+    
     <item>
       <title>THM Writeup | Net Sec Challenge</title>
       <link>https://pwnedbytoxic.github.io/posts/netsecchallenge/</link>
