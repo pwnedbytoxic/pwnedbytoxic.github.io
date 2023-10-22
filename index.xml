@@ -18,7 +18,7 @@ PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp o
     </item>
     
     <item>
-      <title>THM Writeup | Net Sec Challenge</title>
+      <title>TryHackMe Writeup | Net Sec Challenge</title>
       <link>https://pwnedbytoxic.github.io/posts/netsecchallenge/</link>
       <pubDate>Sat, 14 Oct 2023 17:27:51 -0400</pubDate>
       
@@ -31,17 +31,17 @@ PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp o
     </item>
     
     <item>
-      <title>Contact</title>
+      <title>Contact Me</title>
       <link>https://pwnedbytoxic.github.io/contact/</link>
       <pubDate>Fri, 13 Oct 2023 14:45:33 -0400</pubDate>
       
       <guid>https://pwnedbytoxic.github.io/contact/</guid>
-      <description>Contact Me Feel free to reach out and connect with me through the following platforms:
- Instagram: @damon.hoody Snapchat: @prod.toxic Discord: @pwnedbytoxic LinkedIn: @damon-hoody TryHackMe: toxic.sec Hack The Box: toxicsec GitHub: pwnedbytoxic Email: hoody.damon@gmail.com Secure Email: tech.toxic@proton.me Soundcloud: @datboitoxic  Whether you want to chat about cybersecurity/networking, share your experiences, or have any questions, I&amp;rsquo;m here to connect with you. Don&amp;rsquo;t hesitate to send a message or follow me on these platforms.</description>
+      <description>Feel free to reach out and connect with me through the following platforms:
+ Instagram: @damon.hoody Snapchat: @prod.toxic Discord: @pwnedbytoxic LinkedIn: @damon-hoody TryHackMe: toxic.sec Hack The Box: toxicsec GitHub: pwnedbytoxic Email: hoody.damon@gmail.com Secure Email: tech.toxic@proton.me Soundcloud: @datboitoxic  Whether you want to chat about cybersecurity/networking, share your experiences, or have any questions, I&amp;rsquo;m here to connect with you. Don&amp;rsquo;t hesitate to send a message or follow me on these platforms. I look forward to engaging with the IT community!</description>
     </item>
     
     <item>
-      <title>THM Writeup | Internal (Hard)</title>
+      <title>TryHackMe Writeup | Internal (Hard)</title>
       <link>https://pwnedbytoxic.github.io/posts/internal/</link>
       <pubDate>Thu, 12 Oct 2023 23:10:05 -0400</pubDate>
       

@@ -18,7 +18,7 @@ PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp o
     </item>
     
     <item>
-      <title>THM Writeup | Net Sec Challenge</title>
+      <title>TryHackMe Writeup | Net Sec Challenge</title>
       <link>https://pwnedbytoxic.github.io/posts/netsecchallenge/</link>
       <pubDate>Sat, 14 Oct 2023 17:27:51 -0400</pubDate>
       
@@ -31,7 +31,7 @@ PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp o
     </item>
     
     <item>
-      <title>THM Writeup | Internal (Hard)</title>
+      <title>TryHackMe Writeup | Internal (Hard)</title>
       <link>https://pwnedbytoxic.github.io/posts/internal/</link>
       <pubDate>Thu, 12 Oct 2023 23:10:05 -0400</pubDate>
       
