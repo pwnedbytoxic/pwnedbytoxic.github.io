@@ -57,7 +57,7 @@ PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p
       
       <guid>https://pwnedbytoxic.github.io/about/</guid>
       <description>About Damon Hoody (aka toxic) Hello world! 👋 I&amp;rsquo;m Damon Hoody, an aspiring cybersecurity enthusiast, CTF (Capture The Flag) player, and dedicated student at the Computer Networking Academy of Cuyahoga Valley Career Center as well as Twinsburg High School. 🌐💻
-🚩 CTF Player: CTFs are my favorite hobby! I thrive on the adrenaline rush of solving complex challenges and uncovering hidden vulnerabilities. My TryHackMe account is currently in the top 5% of hackers!</description>
+🚩 CTF Player: CTFs are my favorite hobby! My TryHackMe account is currently in the top 5% of hackers with over 70 machines hacked. I thrive on the adrenaline rush of solving complex challenges and uncovering hidden vulnerabilities.</description>
     </item>
     
     <item>
