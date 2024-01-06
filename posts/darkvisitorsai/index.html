@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head><title>Posts &ndash; tox@box</title>
+    <head><title>Using Dark Visitors to Safeguard from AI Bot Agents &ndash; tox@box</title>
 <meta name="description" content="A driven 16 y/o [infosec](https://tryhackme.com/p/toxic.sec) student from ohio looking for new opportunities to learn and grow :&gt;">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,35 +49,47 @@
 </header>
 
             <section class="page__body">
-    <h1 id="posts">Posts</h1>
-
+    <header class="content__header">
+        <h1>Using Dark Visitors to Safeguard from AI Bot Agents</h1>
+    </header>
     
+    <div class="content__body">
+        <hr>
+<p><img src="/robots.JPG" alt="screenshot"></p>
+<p>In the ever-evolving landscape of the internet, websites are constantly under the watchful eyes of various entities, including search engines and automated bots. While search engines play a crucial role in driving organic traffic to your site, not all bots have good intentions. Some automated agents, powered by artificial intelligence (AI), may scrape your website content for malicious purposes, including content theft, data mining, SEO manipulation, price scraping, vulnerability scanning, DDoS attacks, etc. This is where the humble <code>robots.txt</code> file steps in as your first line of defense.</p>
+<h1 id="what-is-robotstxt">What is <code>robots.txt</code>?</h1>
+<p>The robots.txt file is a web standard used by sites to communicate with web crawlers and other automated agents, specifying which parts of the site should not be crawled or analyzed. It serves as a set of instructions for web robots &amp; AI, outlining the areas they are allowed to access and those they should avoid. Essentially, it&rsquo;s a virtual &ldquo;DO NOT ENTER&rdquo; sign for bots.</p>
+<h1 id="crafting-an-effective-robotstxt-file-with-dark-visitors">Crafting an Effective <code>robots.txt</code> File with Dark Visitors</h1>
+<p>Dark Visitors is a curated list of known AI agents currently roaming the internet (see script below to parse the list). It may be accessed at <a href="https://darkvisitors.com">darkvisitors.com</a>. In order to utilize this list, you must create a <code>robots.txt</code> text file within the root of your website (investigate how to do this for your website solution). For hugo users, add <code>enableRobotsTXT = true</code> to your <code>config.toml</code> and make a robots.txt file in /layouts.</p>
+<p>In order to customize this list into something like the screenshot at the top of this site, we must decide which agents to block, and which to allow through. I have crafted a quick payload on my linux machine with the command-line tool cURL to do this for me:</p>
+<pre tabindex="0"><code>curl -s https://darkvisitors.com/agents | grep -o '&lt;div class=&quot;name agent-name&quot;&gt;.*&lt;/div&gt;' | sed 's/&lt;div class=&quot;name agent-name&quot;&gt;\(.*\)&lt;\/div&gt;/\1/'
+</code></pre><p>Essentially, this script parses the site for an updated list of all of the agents that are currently tracked by the website &amp; sorts the content with <code>grep</code> and <code>sed</code>.</p>
+<p>Personally, I do not block all of these agents, just the most important AI data scrapers for simpler bot protection. Here is the robots list that I currently use (also in this sites <a href="https://pwnedbytoxic.github.io/robots.txt">/robots.txt</a> :D)</p>
+<pre tabindex="0"><code>User-agent: anthropic-ai
+Disallow: /
 
-    <ul>
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/darkvisitorsai/">Using Dark Visitors to Safeguard from AI Bot Agents</a></li>
+User-agent: CCBot
+Disallow: /
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/freeudemy/">Get Free IT Certification Prep via Public Library</a></li>
+User-agent: FacebookBot
+Disallow: /
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/pehcapstone/">Practical Ethical Hacking Capstone NOTES</a></li>
+User-agent: Google-Extended
+Disallow: /
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/expose/">TryHackMe Writeup | Expose</a></li>
+User-agent: GPTBot
+Disallow: /
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/netsecchallenge/">TryHackMe Writeup | Net Sec Challenge</a></li>
+User-agent: omgilibot
+Disallow: /
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/internal/">TryHackMe Writeup | Internal (Hard)</a></li>
+User-agent: omgili
+Disallow: /
+</code></pre><p>Again, you can customize this list any way you want, but this configuration makes me feel a bit secure in this crazy age of mass-botting &amp; web-scraping AI.</p>
+<p>Happy Hacking!</p>
 
-    
-        <li><a href="https://pwnedbytoxic.github.io/posts/welcome/">Welcome!</a></li>
-
-    
-    </ul>
-
+    </div>
+    <footer class="content__footer"></footer>
 
             </section>
 
@@ -116,7 +128,15 @@
 </div>
                 <hr>
                 <div class="aside__content">
-    <p>Consolidation of all blog posts: guides, writeups, tutorials, etc.</p>
+    
+    
+        <p>
+            
+            2024-01-06
+        </p>
+    
+
+    
 
                 </div>
             </section>
@@ -134,8 +154,6 @@
     
       
     
-      
-        
       
     
     

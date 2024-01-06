@@ -6,7 +6,16 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Dec 2023 00:14:01 -0500</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Jan 2024 00:51:01 -0500</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Dark Visitors to Safeguard from AI Bot Agents</title>
+      <link>https://pwnedbytoxic.github.io/posts/darkvisitorsai/</link>
+      <pubDate>Sat, 06 Jan 2024 00:51:01 -0500</pubDate>
+      
+      <guid>https://pwnedbytoxic.github.io/posts/darkvisitorsai/</guid>
+      <description>In the ever-evolving landscape of the internet, websites are constantly under the watchful eyes of various entities, including search engines and automated bots. While search engines play a crucial role in driving organic traffic to your site, not all bots have good intentions. Some automated agents, powered by artificial intelligence (AI), may scrape your website content for malicious purposes, including content theft, data mining, SEO manipulation, price scraping, vulnerability scanning, DDoS attacks, etc.</description>
+    </item>
+    
     <item>
       <title>Get Free IT Certification Prep via Public Library</title>
       <link>https://pwnedbytoxic.github.io/posts/freeudemy/</link>
