@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head><title>Categories &ndash; tox@box</title>
+    <head><title>FreeNginx, the new fork of Nginx by Dounin &ndash; tox@box</title>
 <meta name="description" content="A driven 17 y/o [infosec](https://tryhackme.com/p/toxic.sec) student from ohio looking for new opportunities to learn and grow :&gt;">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
     
     <li class="main-nav__item"><a class="nav-main-item" href="https://docs.google.com/document/d/1zWXAmfiDw3oxMSibSaq56T1kB_DEaqXL/edit?usp=sharing" title="">Resume</a></li>
     
-    <li class="main-nav__item"><a class="nav-main-item" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://pwnedbytoxic.github.io/posts/" title="Posts">Posts</a></li>
     
     </ul>
 </nav>
@@ -49,14 +49,32 @@
 </header>
 
             <section class="page__body">
-    <h1 id="categories">Categories</h1>
-
+    <header class="content__header">
+        <h1>FreeNginx, the new fork of Nginx by Dounin</h1>
+    </header>
     
+    <div class="content__body">
+        <p><img src="/nginx.png" alt="screenshot"></p>
+<p>One of the key developers of Nginx, the most popular web server in the world (managing 1/3 of all delivered &amp; proxied web pages on the Internet), has announced his withdrawal from the project. Unlike the current Nginx project &amp; its earlier fork named <a href="https://angie.software/en/">Angie</a>, the new fork, named <a href="https://freenginx.org/">freenginx</a>, aims to &ldquo;be run by developers, and not corporate entities.&rdquo; This comes after the acquisition of Nginx, Inc. by F5 in 2019, the same year two Nginx leaders were coincidentally detained and interrogated by the FSB (<a href="https://www.zdnet.com/article/russian-police-raid-nginx-moscow-office/">another story to research</a>).</p>
+<p>After F5 closed its Moscow office in 2022, Maxim Dounin, long-time developer of nginx since its creation, has been laid-off and maintained his role as a volunteer for nginx. Things have come to a head, and the need for a change is patently clear. As he puts it himself,</p>
+<pre tabindex="0"><code>&gt; &gt; starting from today, I will no longer participate in nginx
+&gt; &gt; development as run by F5.  Instead, I’m starting an alternative
+&gt; &gt; project, which is going to be run by developers, and not corporate
+&gt; &gt; entities:
 
-    <ul>
-    
-    </ul>
+&gt; &gt; http://freenginx.org/
 
+&gt; &gt; The goal is to keep nginx development free from arbitrary corporate
+&gt; &gt; actions.  Help and contributions are welcome.  Hope it will be
+&gt; &gt; beneficial for everyone.
+
+(from freenginx.org)
+</code></pre><p>In particular, these &ldquo;arbitrary corperate actions&rdquo; refer to the company&rsquo;s intervention into the security policy on CVEs that Nginx has been using for years, ignoring both the policies and opinions of the developers that have crafted the project for more than a decade. F5 forced them to make a security release for bugs in the experimental HTTP/3 code, despite the fact that such issues are expected to be handled as ordinary bugs. Guess that prompted a fork <code>¯\_(ツ)_/¯</code>.</p>
+<h2 id="what-does-this-mean-for-us-developers">What does this mean for us developers?</h2>
+<p>As it stands, There is no consensus on whether we should be switching to freenginx in the future, or even if it is anything more than an alternative. Personally, I will be staying on my stable version &ndash; far too many rely on nginx and not everyone is willing to switch for that feeling of true FOSS. All we can do is wait and watch.</p>
+
+    </div>
+    <footer class="content__footer"></footer>
 
             </section>
 
@@ -95,6 +113,14 @@
 </div>
                 <hr>
                 <div class="aside__content">
+    
+    
+        <p>
+            
+            2024-02-18
+        </p>
+    
+
     
 
                 </div>

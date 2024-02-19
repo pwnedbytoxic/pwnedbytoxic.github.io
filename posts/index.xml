@@ -6,7 +6,16 @@
     <description>Recent content in Posts on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jan 2024 00:51:01 -0500</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FreeNginx, the new fork of Nginx by Dounin</title>
+      <link>https://pwnedbytoxic.github.io/posts/freenginx/</link>
+      <pubDate>Sun, 18 Feb 2024 23:14:55 -0500</pubDate>
+      
+      <guid>https://pwnedbytoxic.github.io/posts/freenginx/</guid>
+      <description>One of the key developers of Nginx, the most popular web server in the world (managing 1/3 of all delivered &amp;amp; proxied web pages on the Internet), has announced his withdrawal from the project. Unlike the current Nginx project &amp;amp; its earlier fork named Angie, the new fork, named freenginx, aims to &amp;ldquo;be run by developers, and not corporate entities.&amp;rdquo; This comes after the acquisition of Nginx, Inc. by F5 in 2019, the same year two Nginx leaders were coincidentally detained and interrogated by the FSB (another story to research).</description>
+    </item>
+    
     <item>
       <title>Using Dark Visitors to Safeguard from AI Bot Agents</title>
       <link>https://pwnedbytoxic.github.io/posts/darkvisitorsai/</link>
