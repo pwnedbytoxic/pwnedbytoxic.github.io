@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on tox@box</title>
-    <link>https://pwnedbytoxic.github.io/tags/</link>
+    <link>https://toxtech.me/tags/</link>
     <description>Recent content in Tags on tox@box</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pwnedbytoxic.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://toxtech.me/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>notes</title>
-      <link>https://pwnedbytoxic.github.io/tags/notes/</link>
+      <link>https://toxtech.me/tags/notes/</link>
       <pubDate>Sat, 04 Nov 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://pwnedbytoxic.github.io/tags/notes/</guid>
+      <guid>https://toxtech.me/tags/notes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>index</title>
-      <link>https://pwnedbytoxic.github.io/tags/index/</link>
+      <link>https://toxtech.me/tags/index/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://pwnedbytoxic.github.io/tags/index/</guid>
+      <guid>https://toxtech.me/tags/index/</guid>
       <description></description>
     </item>
     
