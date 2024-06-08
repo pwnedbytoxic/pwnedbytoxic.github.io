@@ -114,7 +114,7 @@ Service Info: OS: Unix
 |_  256 eda93aaa4c6b16e60d437546fb33b229 (ED25519)
 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
 SF-Port22-TCP:V=7.93%I=7%D=10/14%Time=652AE813%P=x86_64-pc-linux-gnu%r(NUL
-SF:L,29,&quot;SSH-2\.0-OpenSSH_8\.2p1\x20THM{------------}\r\n&quot;);
+SF:L,29,&#34;SSH-2\.0-OpenSSH_8\.2p1\x20THM{------------}\r\n&#34;);
 </code></pre><hr>
 <p><strong>[Question 2.7]</strong> now gives us added context: <code> We learned two usernames using social engineering: eddie and quinn. What is the flag hidden in one of these two account files and accessible via FTP?</code></p>
 <p>In order to answer this question, we must utilize our hydra skills to bruteforce credentials for each user.</p>
@@ -197,6 +197,17 @@ SF:L,29,&quot;SSH-2\.0-OpenSSH_8\.2p1\x20THM{------------}\r\n&quot;);
       
     
     
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
     
 </p>
 <br /><br />

@@ -62,7 +62,7 @@
 <h1 id="crafting-an-effective-robotstxt-file-with-dark-visitors">Crafting an Effective <code>robots.txt</code> File with Dark Visitors</h1>
 <p>Dark Visitors is a curated list of known AI agents currently roaming the internet (see script below to parse the list). It may be accessed at <a href="https://darkvisitors.com">darkvisitors.com</a>. In order to utilize this list, you must create a <code>robots.txt</code> text file within the root of your website (investigate how to do this for your website solution). For hugo users, add <code>enableRobotsTXT = true</code> to your <code>config.toml</code> and make a robots.txt file in /layouts.</p>
 <p>In order to customize this list into something like the screenshot at the top of this site, we must decide which agents to block, and which to allow through. I have crafted a quick payload on my linux machine with the command-line tool cURL to do this for me:</p>
-<pre tabindex="0"><code>curl -s https://darkvisitors.com/agents | grep -o '&lt;div class=&quot;name agent-name&quot;&gt;.*&lt;/div&gt;' | sed 's/&lt;div class=&quot;name agent-name&quot;&gt;\(.*\)&lt;\/div&gt;/\1/'
+<pre tabindex="0"><code>curl -s https://darkvisitors.com/agents | grep -o &#39;&lt;div class=&#34;name agent-name&#34;&gt;.*&lt;/div&gt;&#39; | sed &#39;s/&lt;div class=&#34;name agent-name&#34;&gt;\(.*\)&lt;\/div&gt;/\1/&#39;
 </code></pre><p>Essentially, this script parses the site for an updated list of all of the agents that are currently tracked by the website &amp; sorts the content with <code>grep</code> and <code>sed</code>.</p>
 <p>Personally, I do not block all of these agents, just the most important AI data scrapers for simpler bot protection. Here is the robots list that I currently use (also in this sites <a href="https://pwnedbytoxic.github.io/robots.txt">/robots.txt</a> :D)</p>
 <pre tabindex="0"><code>User-agent: anthropic-ai
@@ -162,6 +162,17 @@ Disallow: /
       
     
     
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
     
 </p>
 <br /><br />
