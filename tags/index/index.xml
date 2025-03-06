@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Index on tox@box</title>
-    <link>https://toxtech.me/tags/index/</link>
+    <link>https://hoody.cx/tags/index/</link>
     <description>Recent content in Index on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate>
-    <atom:link href="https://toxtech.me/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hoody.cx/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>https://toxtech.me/posts/</link>
+      <link>https://hoody.cx/posts/</link>
       <pubDate>Sun, 18 Feb 2024 23:14:55 -0500</pubDate>
-      <guid>https://toxtech.me/posts/</guid>
+      <guid>https://hoody.cx/posts/</guid>
       <description></description>
     </item>
   </channel>

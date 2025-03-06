@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on tox@box</title>
-    <link>https://toxtech.me/categories/</link>
+    <link>https://hoody.cx/categories/</link>
     <description>Recent content in Categories on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://toxtech.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hoody.cx/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
