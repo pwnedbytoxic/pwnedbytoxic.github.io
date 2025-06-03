@@ -6,8 +6,15 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jun 2025 10:00:00 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Damon Hoody</title>
+      <link>https://hoody.cx/about/</link>
+      <pubDate>Mon, 02 Jun 2025 10:00:00 -0400</pubDate>
+      <guid>https://hoody.cx/about/</guid>
+      <description>I’m Damon Hoody—a network engineer in training with a strong foundation in systems, routing, switching, and network security. I currently work as a Computer Technician at Cuyahoga Valley Career Center, wherein I recently graduated with honors and distinction at the Cisco Networking Academy. I am currently preparing to pursue my B.S. in Network Engineering and Security from Western Governors University.&#xA;My technical work spans a range of infrastructure and operations roles: I’ve led lab-wide Windows system deployments, configured core switching for 10Gbps backup uplinks, and engineered redundant fiber connectivity across multiple MDF/IDF closets.</description>
+    </item>
     <item>
       <title>FreeNginx, the new fork of Nginx by Dounin</title>
       <link>https://hoody.cx/posts/freenginx/</link>
@@ -63,13 +70,6 @@
       <pubDate>Thu, 12 Oct 2023 23:10:05 -0400</pubDate>
       <guid>https://hoody.cx/posts/internal/</guid>
       <description>Introduction/Overview Challenge Name: TryHackMe Category: Penetration Testing Challenge Points: 60 Author: TheMayor Description: Complex Linux &amp;amp; Docker exploitation without the usage of metasploit (usage of CVE-2021-4034). Scanning/Recon IP Address: 10.10.174.253 Inital scan with nmap -p- 10.10.174.253 and later nmap -A -p 22,80, resulting in&#xA;PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 6efaefbef65f98b9597bf78eb9c5621e (RSA) | 256 ed64ed33e5c93058ba23040d14eb30e9 (ECDSA) |_ 256 b07f7f7b5262622a60d43d36fa89eeff (ED25519) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 80/tcp open http Apache httpd 2.</description>
-    </item>
-    <item>
-      <title>About Damon Hoody (aka toxic)</title>
-      <link>https://hoody.cx/about/</link>
-      <pubDate>Sun, 08 Oct 2023 15:28:21 -0400</pubDate>
-      <guid>https://hoody.cx/about/</guid>
-      <description>Hello world! 👋 I&amp;rsquo;m Damon Hoody, an aspiring cybersecurity enthusiast, CTF (Capture The Flag) player, and dedicated student at the Computer Networking Academy of Cuyahoga Valley Career Center as well as Twinsburg High School. 🌐💻&#xA;🚩 CTF Player: CTFs are my favorite hobby! My TryHackMe account is currently in the top 5% of hackers with over 70 machines hacked. I thrive on the adrenaline rush of solving complex challenges and uncovering hidden vulnerabilities.</description>
     </item>
     <item>
       <title>Welcome!</title>
