@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>CCNA Chronicles: L2 Security Lab &ndash; tox@box</title>
+<meta name="description" content="A driven 18 y/o [aspiring network engineer](https://www.linkedin.com/in/damon-hoody/) from ohio looking for new opportunities to learn and grow :&gt;">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://hoody.cx/css/palettes/windows-custom.css">
+<link rel="stylesheet" href="https://hoody.cx/css/risotto.css">
+<link rel="stylesheet" href="https://hoody.cx/css/custom.css">
+
+
+<link rel="icon" href="https://hoody.cx/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://hoody.cx/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://drive.google.com/file/d/1b8fnjk50LEIXXjagEDSBv9F9G7CbIMNf/view?usp=sharing" title="">Resume</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://hoody.cx/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>CCNA Chronicles: L2 Security Lab</h1>
+    </header>
+    
+    <div class="content__body">
+        <h2 id="overview">Overview</h2>
+<p><img src="/l2securitypt.webp" alt=""></p>
+<p>In this lab, we’ll implement foundational Layer 2 security mechanisms on a Cisco Catalyst 3560X switch. These features protect against common attack vectors like ARP spoofing, rogue DHCP servers, and IP address impersonation. This lab also incorporates inter-VLAN routing using our 3560x (Requires GNS3).</p>
+<p>Security Mechanisms Covered:</p>
+<ul>
+<li>DHCP Snooping</li>
+<li>Dynamic ARP Inspection (DAI)</li>
+<li>IP Source Guard (IPSG)</li>
+</ul>
+<h2 id="lab-topology-gns3--packet-tracer">Lab Topology (GNS3 / Packet Tracer)</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Device</th>
+          <th>Interface</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Switch</td>
+          <td>Fa0/2-4</td>
+          <td>PCs (VLAN 10)</td>
+      </tr>
+      <tr>
+          <td>Fa0/5</td>
+          <td>Legit DHCP Server</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Fa0/6</td>
+          <td>PC on VLAN 20</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Fa0/7</td>
+          <td>Rogue DHCP Server</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>VLAN Assignments:</p>
+<ul>
+<li>VLAN 10: Workstations</li>
+<li>VLAN 20: Admin PCs</li>
+<li>VLAN 99: Management (optional)</li>
+</ul>
+<h2 id="objective">Objective</h2>
+<ol>
+<li>Set up inter-VLAN routing via SVIs on the switch.</li>
+<li>Enforce Layer 2 security on the switch.</li>
+<li>Simulate DHCP attacks and demonstrate feature effectiveness.</li>
+</ol>
+<h2 id="part-1-vlan-and-routing-configuration">Part 1: VLAN and Routing Configuration</h2>
+<p>On the Switch (3560X):</p>
+<pre tabindex="0"><code>Switch(config)# ip routing
+
+Switch(config)# vlan 10
+Switch(config-vlan)# name USERS
+Switch(config-vlan)# exit
+
+Switch(config)# vlan 20
+Switch(config-vlan)# name ADMIN
+Switch(config-vlan)# exit
+
+Switch(config)# interface range fa0/2 - 4
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# exit
+
+Switch(config)# interface fa0/6
+Switch(config-if)# switchport access vlan 20
+Switch(config-if)# switchport mode access
+Switch(config-if)# exit
+
+Switch(config)# interface fa0/5
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# switchport mode access
+Switch(config-if)# exit
+
+Switch(config)# interface fa0/7
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# switchport mode access
+Switch(config-if)# exit 
+</code></pre><p>Create SVIs for Routing:</p>
+<pre tabindex="0"><code>Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
+Switch(config-if)# exit
+
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown
+Switch(config-if)# exit
+</code></pre><p>Ensure the switch has a default route if needed:
+<code>Switch(config)# ip route 0.0.0.0 0.0.0.0 &lt;gateway-if-necessary&gt;</code></p>
+<h2 id="part-2-dhcp-snooping-configuration">Part 2: DHCP Snooping Configuration</h2>
+<p>Enable Globally and for VLANs:</p>
+<pre tabindex="0"><code>Switch(config)# ip dhcp snooping
+Switch(config)# ip dhcp snooping vlan 10,20
+</code></pre><p>Trust Legitimate DHCP Server Port:</p>
+<pre tabindex="0"><code>Switch(config)# interface fa0/5
+Switch(config-if)# ip dhcp snooping trust
+Switch(config-if)# exit
+</code></pre><p>Verification:</p>
+<pre tabindex="0"><code>Switch# show ip dhcp snooping
+Switch# show ip dhcp snooping binding
+</code></pre><h2 id="part-3-dynamic-arp-inspection-dai">Part 3: Dynamic ARP Inspection (DAI)</h2>
+<p>Enable DAI for VLANs:</p>
+<pre tabindex="0"><code>Switch(config)# ip arp inspection vlan 10,20
+</code></pre><p>Trust DHCP Server Port:</p>
+<pre tabindex="0"><code>Switch(config)# interface fa0/5
+Switch(config-if)# ip arp inspection trust
+Switch(config-if)# exit
+</code></pre><p>Verification:</p>
+<pre tabindex="0"><code>Switch# show ip arp inspection interfaces
+Switch# show ip arp inspection vlan 10
+Switch# show ip arp inspection vlan 20
+</code></pre><h2 id="part-4-ip-source-guard-ipsg">Part 4: IP Source Guard (IPSG)</h2>
+<p>Apply to Access Ports:</p>
+<pre tabindex="0"><code>Switch(config)# interface range fa0/2 - 4, fa0/6
+Switch(config-if-range)# ip verify source
+Switch(config-if-range)# exit
+</code></pre><p>Verification:
+<code>Switch# show ip verify source</code></p>
+<h2 id="part-5-testing-the-configuration">Part 5: Testing the Configuration</h2>
+<ol>
+<li>
+<p>Connect Legit PC (e.g., PC0 on Fa0/2)</p>
+<ul>
+<li>Should receive IP from Legit DHCP (Fa0/5)</li>
+<li>Verify using ipconfig or ip addr on PC</li>
+</ul>
+</li>
+<li>
+<p>Connect Rogue DHCP Server (Fa0/7)</p>
+<ul>
+<li>Should be blocked by DHCP Snooping</li>
+<li>Run packet capture or check show ip dhcp snooping binding</li>
+</ul>
+</li>
+<li>
+<p>Try ARP Spoofing from PC1 (Fa0/3)</p>
+<ul>
+<li>Should be blocked by DAI</li>
+</ul>
+</li>
+<li>
+<p>Spoof IP on PC2 (Fa0/4)</p>
+<ul>
+<li>Manually assign a mismatched IP</li>
+<li>Should be blocked by IP Source Guard</li>
+</ul>
+</li>
+</ol>
+<h2 id="summary-of-interface-roles">Summary of Interface Roles</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Interface</th>
+          <th>Role</th>
+          <th>VLAN</th>
+          <th>Trusted?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Fa0/2–4</td>
+          <td>Workstations</td>
+          <td>10</td>
+          <td>No</td>
+      </tr>
+      <tr>
+          <td>Fa0/5</td>
+          <td>Legit DHCP Server</td>
+          <td>10</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Fa0/6</td>
+          <td>Admin PC</td>
+          <td>20</td>
+          <td>No</td>
+      </tr>
+      <tr>
+          <td>Fa0/7</td>
+          <td>Rogue DHCP</td>
+          <td>10</td>
+          <td>No</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="conclusion">Conclusion</h2>
+<p>By combining DHCP Snooping, Dynamic ARP Inspection, and IP Source Guard, we create a layered security posture against the most common Layer 2 threats (defense in depth!):</p>
+<ul>
+<li>Rogue DHCP servers are suppressed</li>
+<li>Malicious ARP replies are filtered</li>
+<li>IP/MAC spoofing attempts are blocked at the port level</li>
+</ul>
+<p>SVI-based routing makes this topology realistic for enterprise L3 switch deployments, where inter-VLAN routing is handled locally without a router-on-a-stick setup.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>Future labs may explore:</p>
+<ul>
+<li>802.1X with RADIUS integration</li>
+<li>Sticky MAC with Port Security</li>
+<li>Automating switch hardening via EEM or Ansible</li>
+</ul>
+<p>Thank you for reading, and may your networks stay secure.</p>
+<p>— Damon Hoody</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://hoody.cx/images/rice.svg" alt="Logo">
+<h1 class="about__title">tox@box</h1>
+<p class="about__description">A driven 18 y/o <a href="https://www.linkedin.com/in/damon-hoody/">aspiring network engineer</a> from ohio looking for new opportunities to learn and grow :&gt;</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.linkedin.com/in/damon-hoody/" rel="me" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://infosec.exchange/@toxbox" rel="me" aria-label="Mastodon" title="Mastodon"><i class="fa-brands fa-mastodon" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2025-04-06
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by toxic //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

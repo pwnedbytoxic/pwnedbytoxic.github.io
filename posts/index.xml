@@ -6,10 +6,17 @@
     <description>Recent content in Posts on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jan 2025 00:17:25 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 06 Apr 2025 01:52:30 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Ccna</title>
+      <title>CCNA Chronicles: L2 Security Lab</title>
+      <link>https://hoody.cx/posts/l2securitylab/</link>
+      <pubDate>Sun, 06 Apr 2025 01:52:30 -0400</pubDate>
+      <guid>https://hoody.cx/posts/l2securitylab/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://hoody.cx/l2securitypt.webp&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;In this lab, we’ll implement foundational Layer 2 security mechanisms on a Cisco Catalyst 3560X switch. These features protect against common attack vectors like ARP spoofing, rogue DHCP servers, and IP address impersonation. This lab also incorporates inter-VLAN routing using our 3560x (Requires GNS3).&lt;/p&gt;&#xA;&lt;p&gt;Security Mechanisms Covered:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;DHCP Snooping&lt;/li&gt;&#xA;&lt;li&gt;Dynamic ARP Inspection (DAI)&lt;/li&gt;&#xA;&lt;li&gt;IP Source Guard (IPSG)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;lab-topology-gns3--packet-tracer&#34;&gt;Lab Topology (GNS3 / Packet Tracer)&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Device&lt;/th&gt;&#xA;          &lt;th&gt;Interface&lt;/th&gt;&#xA;          &lt;th&gt;Description&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Switch&lt;/td&gt;&#xA;          &lt;td&gt;Fa0/2-4&lt;/td&gt;&#xA;          &lt;td&gt;PCs (VLAN 10)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Fa0/5&lt;/td&gt;&#xA;          &lt;td&gt;Legit DHCP Server&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Fa0/6&lt;/td&gt;&#xA;          &lt;td&gt;PC on VLAN 20&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Fa0/7&lt;/td&gt;&#xA;          &lt;td&gt;Rogue DHCP Server&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;VLAN Assignments:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CCNA Chronicles: CCNA3</title>
       <link>https://hoody.cx/posts/ccna/</link>
       <pubDate>Mon, 06 Jan 2025 00:17:25 -0400</pubDate>
       <guid>https://hoody.cx/posts/ccna/</guid>
@@ -69,7 +76,7 @@
       <link>https://hoody.cx/posts/welcome/</link>
       <pubDate>Sun, 08 Oct 2023 14:55:42 -0400</pubDate>
       <guid>https://hoody.cx/posts/welcome/</guid>
-      <description>&lt;h1 id=&#34;welcome-to-toxbox&#34;&gt;Welcome to tox@box&lt;/h1&gt;&#xA;&lt;p&gt;Welcome to &lt;strong&gt;tox@box&lt;/strong&gt;, my personal blog and writeup library wherein we explore &amp;amp; expose a vast knowledge pool of IT including network engineering, network security, &amp;amp; cybersecurity.&lt;/p&gt;&#xA;&lt;h2 id=&#34;about-toxbox&#34;&gt;About tox@box&lt;/h2&gt;&#xA;&lt;p&gt;At tox@box, I&amp;rsquo;m on a mission to make the internet a safer place, one packet at a time. I&amp;rsquo;m Damon Hoody (aka &amp;ldquo;tox&amp;rdquo;), your host, and I will guide through the exciting and ever-evolving landscape of IT.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-cybersecurity&#34;&gt;What is Cybersecurity?&lt;/h3&gt;&#xA;&lt;p&gt;Cybersecurity is the practice of protecting digital systems, networks, and data from malicious attacks, unauthorized access, and data breaches. It encompasses a wide range of techniques, technologies, and best practices to safeguard the digital realm.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Thank you for stopping by.&lt;/p&gt;&#xA;&lt;p&gt;This blog exists as a living record of my development as a network engineer. What started as a simple repository for notes and troubleshooting steps has grown into a place where I reflect on lessons learned—both in the lab and in the field—as I pursue professional growth through certifications, hands-on experience, and real-world infrastructure projects.&lt;/p&gt;&#xA;&lt;h3 id=&#34;who-this-site-is-for&#34;&gt;Who This Site Is For&lt;/h3&gt;&#xA;&lt;p&gt;If you’re currently enrolled in a networking class, preparing for certification, or already working in network support or systems administration, this site was built with you in mind. The material I share is meant to strike a balance between foundational concepts and applied skills. Whether it’s interpreting routing table outputs, designing VLAN topologies, building GNS3 simulations, or implementing basic CLI automation with Ansible, I document what I’ve learned in a way that’s intended to be both practical and digestible.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
