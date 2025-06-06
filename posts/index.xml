@@ -6,8 +6,15 @@
     <description>Recent content in Posts on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Feb 2024 23:14:55 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jan 2025 00:17:25 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ccna</title>
+      <link>https://hoody.cx/posts/ccna/</link>
+      <pubDate>Mon, 06 Jan 2025 00:17:25 -0400</pubDate>
+      <guid>https://hoody.cx/posts/ccna/</guid>
+      <description>&lt;p&gt;As of this writing, I’ve just begun CCNA3, the final course in Cisco’s Networking Academy sequence for the 200-301 certification. The journey so far has been both technical and transformative. The earlier phases of study—CCNA1 and CCNA2—focused heavily on foundational Layer 2 technologies: Ethernet LAGs, switching, VLANs, spanning tree, and wireless LAN configs.&lt;/p&gt;&#xA;&lt;p&gt;Now, with CCNA3 underway, the shift toward Layer 3 routing and network automation has been refreshing. I’m currently working through topics like OSPFv2/v3, inter-VLAN routing, first-hop redundancy protocols, and IPv6—all with the added lens of programmable infrastructure. Cisco Packet Tracer and GNS3 have definitely helped bridge the gap between theory and practice, while CLI automation and structured troubleshooting frameworks have been pushing me to think more like an engineer than just a technician.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>FreeNginx, the new fork of Nginx by Dounin</title>
       <link>https://hoody.cx/posts/freenginx/</link>
