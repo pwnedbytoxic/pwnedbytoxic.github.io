@@ -6,8 +6,15 @@
     <description>Recent content in Posts on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Apr 2025 01:52:30 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 05 Jun 2025 08:59:02 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CCNA Chronicles: I passed!</title>
+      <link>https://hoody.cx/posts/ccnafinal/</link>
+      <pubDate>Thu, 05 Jun 2025 08:59:02 -0400</pubDate>
+      <guid>https://hoody.cx/posts/ccnafinal/</guid>
+      <description>&lt;p&gt;So after two years as a Cisco NetAcad student, I finally passed my Cisco CCNA.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://hoody.cx/ccnacert.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m definitely blessed, and I give God all the glory for my understanding of network engineering. I just want to share with you all the blueprint that I used as a NetAcad student that went through CCNA1, 2, and 3, but also the ways that you can self-study via free online materials.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-did-i-do-it&#34;&gt;How did I do it?&lt;/h2&gt;&#xA;&lt;p&gt;If you gain nothing else from this blog post, please know that Boson ExSim for CCNA 200-301 was the glue that kept all of my studies together in my mind for the exam and subsequent BPA national conference competition (blog post on this coming soon!). Please follow &lt;a href=&#34;https://www.reddit.com/r/ccna/comments/wadkbh/surefire_way_to_pass_the_ccna_exam_using_boson&#34;&gt;John Katende&amp;rsquo;s framework&lt;/a&gt; for studying.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CCNA Chronicles: L2 Security Lab</title>
       <link>https://hoody.cx/posts/l2securitylab/</link>
