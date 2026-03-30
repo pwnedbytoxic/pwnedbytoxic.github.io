@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>From EVPN to Emulation: What I&#39;ve Been Actually doing at WGU &ndash; tox@box</title>
+<meta name="description" content="An [aspiring network engineer](https://www.linkedin.com/in/damon-hoody/) seeking growth, purpose, and life anchored in Christ.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://hoody.cx/css/palettes/windows-custom.css">
+<link rel="stylesheet" href="https://hoody.cx/css/risotto.css">
+<link rel="stylesheet" href="https://hoody.cx/css/custom.css">
+
+
+<link rel="icon" href="https://hoody.cx/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://hoody.cx/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://drive.google.com/drive/folders/1zwPspytA2ouwyEeetJZSAK9ML29doOv0?usp=sharing" title="">Resume</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://hoody.cx/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>From EVPN to Emulation: What I&rsquo;ve Been Actually doing at WGU</h1>
+    </header>
+     
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2DG2N2HF5"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-Z2DG2N2HF5');
+        }
+      </script>
+    
+    <div class="content__body">
+        <p><img src="/award.png" alt=""></p>
+<p>It’s been a minute.</p>
+<p>I &rsquo;ve been wrapping up my degree at WGU recently, and I’ve been meaning to sit down and actually write about it; not just the checkbox of “finished,” but what I actually <em>did</em> along the way. This wasn’t a passive degree. If anything, it ended up reinforcing that I’m still very much a network engineer at heart, even while technically enrolled in a “general IT” program (BSIT).</p>
+<h2 id="still-a-network-engineer-just-with-homework-now">Still a Network Engineer (Just With Homework Now)</h2>
+<p>Most of my time at WGU ended up orbiting around networking concepts anyway, intentionally or not.</p>
+<p>At work, I’ve been involved in network engineering, and that bled directly into my coursework. Instead of treating assignments like academic exercises, I used them as an excuse to go deeper on things I actually care about: control planes, optics, layer 2, and how real systems behave under pressure.</p>
+<p>Two projects stand out.</p>
+<hr>
+<h2 id="vxlan-evpn-presentation-excellence-award">VXLAN-EVPN Presentation (Excellence Award)</h2>
+<p>One of my favorite assignments was delivering an <strong>oral presentation to stakeholders on VXLAN-EVPN</strong>.</p>
+<p>Not just “what VXLAN is,” but:</p>
+<ul>
+<li>why EVPN matters as a control plane</li>
+<li>how it replaces flood-and-learn behavior</li>
+<li>how BGP becomes the distribution mechanism for MAC/IP reachability</li>
+<li>what this actually means for scale, multi-tenancy, and operational sanity</li>
+</ul>
+<p>I approached it like I would at work:</p>
+<ul>
+<li>clear problem framing (why L2 domains don’t scale)</li>
+<li>architecture diagrams instead of buzzwords</li>
+<li>tradeoffs (complexity vs. control)</li>
+<li>and most importantly &ndash; <em>what breaks</em></li>
+</ul>
+<p>That assignment ended up earning an <strong>Excellence Award</strong>, which was quite cool. But more importantly, it validated that going deep instead of wide is still the right move.</p>
+<hr>
+<h2 id="fiber-radius-mandrel-lab-excellence-award">Fiber Radius Mandrel Lab (Excellence Award)</h2>
+<p>The second Excellence Award came from something much more physical: a <strong>fiber optic bend radius / mandrel lab</strong>.</p>
+<p>This one hit differently because it wasn’t abstract:</p>
+<ul>
+<li>measuring attenuation under different bend conditions</li>
+<li>seeing real signal degradation instead of just reading about it</li>
+<li>understanding <em>why</em> bend radius specs actually matter in production environments</li>
+</ul>
+<p>It’s one thing to say “don’t exceed minimum bend radius.”<br>
+It’s another to <em>watch your signal fall apart when you do.</em></p>
+<p>Again, Excellence Award here, but more importantly, it reinforced something I already knew:<br>
+<strong>the physical layer still matters, and ignoring it will absolutely burn you.</strong></p>
+<hr>
+<h2 id="certifications-along-the-way">Certifications Along the Way</h2>
+<p>WGU also pushed me through a few certifications:</p>
+<ul>
+<li><strong>LPI Linux Essentials</strong></li>
+<li><strong>AWS Cloud Practitioner</strong></li>
+<li><strong>ITIL v4 Foundations</strong></li>
+</ul>
+<p>Honestly, each of these filled in different gaps:</p>
+<ul>
+<li>Linux Essentials reinforced fundamentals I use constantly but rarely formalize</li>
+<li>AWS Practitioner helped connect infrastructure concepts to cloud abstractions</li>
+<li>ITIL… gave me a better understanding of why change management exists (even if I still argue with it)</li>
+</ul>
+<hr>
+<h2 id="tko-rebuilding-a-dead-games-network-stack">TKO: Rebuilding a Dead Game’s Network Stack</h2>
+<p>Outside of the structured coursework, the most meaningful project I worked on was for my <strong>Web Development Applications (C777)</strong> course:</p>
+<p>👉 <a href="http://tko.hoody.cx">http://tko.hoody.cx</a></p>
+<p>This is a <strong>Python-based emulator for Titanic KungFu Offensive</strong>, a discontinued Cartoon Network Flash game that originally ran on <strong>SmartFoxServer 1.x</strong>.</p>
+<p>What started as a “python web dev project” quickly turned into a full-blown network reverse engineering effort.</p>
+<p>From the README: <a href="https://github.com/pwnedbytoxic/TKO">https://github.com/pwnedbytoxic/TKO</a></p>
+<p>Key pieces I rebuilt:</p>
+<ul>
+<li>Flash policy server</li>
+<li>SmartFox TCP socket emulation</li>
+<li>BlueBox HTTP tunneling</li>
+<li>Lobby, matchmaking, and session flow</li>
+<li>Server-authoritative game simulation</li>
+<li>Packet reconstruction from decompiled ActionScript</li>
+</ul>
+<p>This wasn’t just “make it run”—it was:</p>
+<ul>
+<li>reverse engineering packet formats</li>
+<li>reconstructing timing behavior</li>
+<li>making the server authoritative instead of trusting the client</li>
+<li>fixing edge cases that only show up mid-match</li>
+</ul>
+<p>Basically: <strong>real networking problems, just inside a 2000s Flash game.</strong></p>
+<p>The repo isn’t public (yet), but here’s the upstream:</p>
+<ul>
+<li><a href="https://github.com/pwnedbytoxic/TKO">https://github.com/pwnedbytoxic/TKO</a></li>
+</ul>
+<p>And there’s an active community we&rsquo;ve cultivated working on it here:</p>
+<ul>
+<li><a href="https://discord.gg/Qu6yAkRag4">https://discord.gg/Qu6yAkRag4</a></li>
+</ul>
+<hr>
+<h2 id="700k-views-later">700k Views Later</h2>
+<p>At some point, I posted a clip of the netcode work on Twitter.</p>
+<p>It ended up pulling <strong>700k views</strong>, which I definitely didn’t expect.</p>
+<p><a href="https://x.com/BenTenNews/status/2035921797988642831?s=20">https://x.com/BenTenNews/status/2035921797988642831?s=20</a></p>
+<p>I think it resonated because:</p>
+<ul>
+<li>it’s not often you see SmartFoxServer-era infrastructure brought back to life</li>
+<li>and even less often rebuilt in a modern, server-authoritative way</li>
+</ul>
+<p>It was a nice reminder that:
+<strong>deep technical work still gets attention when it’s visible.</strong></p>
+<hr>
+<h2 id="what-wgu-actually-did-for-me">What WGU Actually Did For Me</h2>
+<p>WGU didn’t turn me into a network engineer, I already was one, even if not yet in title.</p>
+<p>What it <em>did</em> do:</p>
+<ul>
+<li>forced structure around things I might’ve otherwise skipped</li>
+<li>pushed me to document and present ideas clearly</li>
+<li>gave me an excuse to formalize knowledge I’d built informally</li>
+<li>and occasionally made me step outside my comfort zone (looking at you, ITIL)</li>
+</ul>
+<p>But the biggest takeaway so far?</p>
+<p><strong>I never stopped doing real engineering while earning the degree.</strong></p>
+<p>If anything, I doubled down on it:</p>
+<ul>
+<li>VXLAN/EVPN deep dives</li>
+<li>physical layer validation</li>
+<li>protocol emulation</li>
+<li>multiplayer netcode reconstruction</li>
+</ul>
+<p>That’s the part I’m most proud of.</p>
+<hr>
+<h2 id="whats-next">What’s Next</h2>
+<p>More of the same, honestly.</p>
+<ul>
+<li>Keep pushing deeper into network architecture</li>
+<li>Focus on CCNP ENCOR as soon as I graduate</li>
+<li>Keep building weird things (like resurrecting dead games)</li>
+<li>Keep bridging the gap between “academic IT” and “real systems”</li>
+</ul>
+<p>And probably:</p>
+<ul>
+<li>make the TKO repo public once it’s a bit cleaner &amp; fleshed out</li>
+</ul>
+<hr>
+<p>If you’ve read this far, you probably already get it.</p>
+<p>This wasn’t about finishing an IT degree.</p>
+<p>It was about <strong>building things the whole time anyway</strong>.</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://hoody.cx/images/rice.svg" alt="Logo">
+<h1 class="about__title">tox@box</h1>
+<p class="about__description">An <a href="https://www.linkedin.com/in/damon-hoody/">aspiring network engineer</a> seeking growth, purpose, and life anchored in Christ.</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.linkedin.com/in/damon-hoody/" rel="me" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://infosec.exchange/@toxbox" rel="me" aria-label="Mastodon" title="Mastodon"><i class="fa-brands fa-mastodon" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2026-03-30
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by tox //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>
