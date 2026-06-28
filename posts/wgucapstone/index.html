@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>My WGU Capstone: Building a Multi-Site Campus Network in Cisco CML &ndash; tox@box</title>
+<meta name="description" content="An [aspiring network engineer](https://www.linkedin.com/in/damon-hoody/) seeking growth, purpose, and life anchored in Christ.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://hoody.cx/css/palettes/windows-custom.css">
+<link rel="stylesheet" href="https://hoody.cx/css/risotto.css">
+<link rel="stylesheet" href="https://hoody.cx/css/custom.css">
+
+
+<link rel="icon" href="https://hoody.cx/favicon.ico">
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="https://hoody.cx/" class="page__logo-inner">tox@box</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://hoody.cx/contact/" title="">Contact</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://drive.google.com/drive/folders/1zwPspytA2ouwyEeetJZSAK9ML29doOv0?usp=sharing" title="">Resume</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="https://hoody.cx/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>My WGU Capstone: Building a Multi-Site Campus Network in Cisco CML</h1>
+    </header>
+     
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2DG2N2HF5"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-Z2DG2N2HF5');
+        }
+      </script>
+    
+    <div class="content__body">
+        <p><img src="/gtcc-capstone-topology.png" alt=""></p>
+<p>It’s finally done.</p>
+<p>After months of coursework, labbing, troubleshooting, rewriting, and second-guessing my own topology, I finished my WGU capstone. Not just in the sense that I turned in a paper, but in the sense that I built something I could actually explain, defend, and use as a real talking point.</p>
+<p>The project was a secure multi-site campus network proof of concept for a fictional school I called <strong>Greenfield Technical Community College</strong>. The goal was to design and validate a modernized WAN and campus network model for a Main Campus, a Health Sciences branch, and an Admin/Training branch. It was built in Cisco Modeling Labs using CAT8000V routers, IOL-L2 switches, WAN simulator nodes, centralized services, BGP, VLAN segmentation, ACLs, DHCP relay, DNS, syslog, and a small internal web service.</p>
+<p>It started as a capstone.</p>
+<p>It ended up becoming one of the clearest examples I have of what I know outside of just coursework.</p>
+<hr>
+<h2 id="the-idea-behind-the-project">The Idea Behind the Project</h2>
+<p>The fictional client had a very realistic problem. They had multiple campus locations, centralized services at the Main Campus, and branch sites that depended on WAN connectivity to reach those services. The design needed to account for segmentation, guest isolation, operational visibility, centralized services, and degraded WAN behavior.</p>
+<p>I framed the project as an <code>SD-WAN-oriented proof of concept</code>, but I was careful not to claim it was a full production SD-WAN deployment. That distinction mattered a lot. A real Cisco SD-WAN deployment involves controllers, certificates, licensing, redundant transports, templates, control connections, and a lot of operational overhead. My project focused on the routed WAN and campus design underneath that kind of architecture.</p>
+<p>In other words, I wanted to prove the foundation.</p>
+<p>Could the sites exchange routes dynamically? Could users get DHCP from a centralized service? Could DNS resolve internal services? Could approved users access the internal web server while guest users were blocked? Could logs be collected centrally? Could WAN degradation be simulated and observed?</p>
+<p>That was the actual goal.</p>
+<p><img src="/gtcc-capstone-final-topology.png" alt="Figure 1: Final Cisco Modeling Labs proof-of-concept topology"></p>
+<p><em>Figure 1. Final Cisco Modeling Labs topology showing Main Campus, Health Sciences, Admin/Training, CAT8000V routers, IOL-L2 switches, WAN simulators, and centralized services.</em></p>
+<hr>
+<h2 id="building-the-three-site-topology">Building the Three-Site Topology</h2>
+<p>The final topology had three sites.</p>
+<p>Main Campus acted as the hub and shared-services location. Health Sciences and Admin/Training were the two branches. Each site had a CAT8000V router and an IOL-L2 switch. The branches connected back to Main Campus through separate WAN simulator nodes, which gave me a way to test normal, degraded, failed, and restored WAN behavior.</p>
+<p>Main Campus hosted the services:</p>
+<p><code>dnsmasq</code> handled DNS and DHCP.</p>
+<p><code>nginx</code> hosted a basic internal web page.</p>
+<p><code>Ubuntu rsyslog</code> collected centralized logs.</p>
+<p>This was simple on paper, but the details mattered. Each site had its own VLANs and subnets. The routers used 802.1Q subinterfaces as the default gateways. Non-server VLANs used <code>ip helper-address</code> to relay DHCP to the centralized dnsmasq server at Main Campus.</p>
+<p>That ended up being one of the first places where the lab reminded me that simple services can become annoying when they are placed behind real routing boundaries.</p>
+<hr>
+<h2 id="why-i-used-bgp">Why I Used BGP</h2>
+<p>Originally, I debated whether I should use OSPF or BGP. OSPF would have been easier, and for a simple campus lab it would have made plenty of sense.</p>
+<p>But this was supposed to represent a WAN modernization project, and BGP felt like the better fit.</p>
+<p>I used eBGP between the three site routers. Main Campus used AS 65000, Health Sciences used AS 65110, and Admin/Training used AS 65210. Each site advertised its local VLAN networks and WAN transit subnet. That made the lab feel much more like a real WAN edge design, where each site is treated as its own routing domain and route exchange happens intentionally at the edge.</p>
+<p><img src="/gtcc-capstone-bgp-summary.png" alt="Figure 2: BGP neighbor and routing evidence"></p>
+<p><em>Figure 2. BGP evidence showing dynamic route exchange between Main Campus and the branch routers.</em></p>
+<p>The nice thing about BGP in this project was that it made the validation much more meaningful. I could show neighbor relationships, learned routes, advertised prefixes, and the impact of WAN impairment on reachability.</p>
+<p>It also gave me a better interview story than “I added a few static routes.”</p>
+<hr>
+<h2 id="centralized-dhcp-and-dns">Centralized DHCP and DNS</h2>
+<p>The centralized services were where the project started to feel more like a real network and less like a topology diagram.</p>
+<p>The dnsmasq server lived in Main Campus VLAN 40 at <code>10.0.40.10</code>. It provided DHCP scopes for every campus VLAN and local DNS records for internal services like <code>web.gtcc.cx</code>, <code>dns.gtcc.cx</code>, and <code>syslog.gtcc.cx</code>.</p>
+<p><img src="/gtcc-capstone-dnsmasq-config.png" alt="Figure 3: dnsmasq DHCP and DNS configuration"></p>
+<p><em>Figure 3. dnsmasq providing centralized DHCP scopes and internal DNS records for the proof of concept.</em></p>
+<p>This took more troubleshooting than I expected. DHCP relay is one of those things that seems obvious until the server does not hand out the address you expect. The relay gateway address, the scope, the mask, and the actual subnet all had to line up correctly. If they did not, dnsmasq would either ignore the request or only recognize the local server VLAN scope.</p>
+<p>Eventually, I got it working across the campus VLANs. That was a big milestone because it proved that the branches were not just statically configured islands. They were actually consuming centralized infrastructure services across the routed WAN.</p>
+<hr>
+<h2 id="the-internal-web-service">The Internal Web Service</h2>
+<p>The web server was intentionally simple. I put an Nginx server at <code>10.0.40.30</code> and gave it the DNS name <code>web.gtcc.cx</code>.</p>
+<p>The page itself was not the point.</p>
+<p>The point was having a real internal service to test against. Ping is useful, but it does not tell the whole story. A web service let me validate DNS, routing, ACL behavior, and WAN impairment in a way that felt more realistic.</p>
+<p><img src="/gtcc-capstone-nginx-web.png" alt="Figure 4: Approved internal access to web.gtcc.cx"></p>
+<p><em>Figure 4. Approved internal client reaching the Nginx web server at web.gtcc.cx.</em></p>
+<p>Once that was working, I had a clean test target for the rest of the project. Approved users should be able to reach it. Guest users should be able to resolve it but not access it. WAN impairment should affect reachability in a visible way. The service gave the topology something meaningful to protect and validate.</p>
+<hr>
+<h2 id="guest-isolation">Guest Isolation</h2>
+<p>The guest isolation test was probably my favorite part of the capstone evidence.</p>
+<p>The Health Sciences guest VLAN could use DHCP and DNS, but it could not access protected internal resources. That meant a guest client could resolve <code>web.gtcc.cx</code> to <code>10.0.40.30</code>, but attempts to ping or browse to the internal web server failed because the <code>guest-iso</code> ACL denied access to internal <code>10.0.0.0/8</code> destinations.</p>
+<p><img src="/gtcc-capstone-guest-isolation.png" alt="Figure 5: Guest VLAN DNS resolution with blocked internal access"></p>
+<p><em>Figure 5. Guest VLAN client resolving web.gtcc.cx while ICMP and HTTP access to the internal web server are blocked.</em></p>
+<p>This was a good reminder that DNS resolution and access are not the same thing. A client can know where something is and still not be allowed to reach it.</p>
+<p>The evidence looked roughly like this from the guest side:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Client VLAN: Health Sciences Guest
+</span></span><span style="display:flex;"><span>Client subnet: 10.1.60.0/24
+</span></span><span style="display:flex;"><span>Default gateway: 10.1.60.1
+</span></span><span style="display:flex;"><span>Internal DNS: 10.0.40.10
+</span></span><span style="display:flex;"><span>Internal web service: web.gtcc.cx / 10.0.40.30
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Expected behavior:
+</span></span><span style="display:flex;"><span>DNS resolution succeeds.
+</span></span><span style="display:flex;"><span>ICMP and HTTP access to protected internal resources fail.
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>nslookup web.gtcc.cx
+</span></span><span style="display:flex;"><span>Name: web.gtcc.cx
+</span></span><span style="display:flex;"><span>Address: 10.0.40.30
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ping web.gtcc.cx
+</span></span><span style="display:flex;"><span>From _gateway (10.1.60.1): Packet filtered
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>wget http://web.gtcc.cx
+</span></span><span style="display:flex;"><span>Resolving web.gtcc.cx... 10.0.40.30
+</span></span><span style="display:flex;"><span>Connecting to web.gtcc.cx... failed: No route to host
+</span></span></code></pre></div><p>That was the key behavior I wanted to prove.</p>
+<p>The guest client was not broken. DNS was not broken. Routing was not broken. The firewall policy was doing its job.</p>
+<p>On the router side, the <code>guest-iso</code> ACL followed the same idea: allow the minimum required services first, then deny guest access to internal campus networks.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>permit udp any eq bootpc any eq bootps
+</span></span><span style="display:flex;"><span>permit udp 10.1.60.0 0.0.0.255 host 10.0.40.10 eq domain
+</span></span><span style="display:flex;"><span>permit tcp 10.1.60.0 0.0.0.255 host 10.0.40.10 eq domain
+</span></span><span style="display:flex;"><span>deny ip 10.1.60.0 0.0.0.255 10.0.0.0 0.255.255.255 log
+</span></span></code></pre></div><p>In plain English:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Allow guest DHCP
+</span></span><span style="display:flex;"><span>Allow guest DNS to the internal DNS server
+</span></span><span style="display:flex;"><span>Deny guest access to protected internal networks
+</span></span><span style="display:flex;"><span>Log denied traffic for validation
+</span></span></code></pre></div><p>That was one of the most satisfying parts of the project because it proved the policy model. The network was not just connected. It was segmented intentionally.</p>
+<hr>
+<h2 id="centralized-syslog">Centralized Syslog</h2>
+<p>The syslog portion gave me one of the more practical troubleshooting lessons in the project.</p>
+<p>Originally, I planned to use the prebuilt CML syslog appliance. That would have been cleaner in the report and easier to explain. But the appliance did not behave reliably with the boot customization I needed, and after spending too much time trying to force it, I replaced it with an Ubuntu server running <code>rsyslog</code>.</p>
+<p>That ended up being the right decision.</p>
+<p>The deliverable was not “use this exact image.” The deliverable was centralized logging. The Ubuntu server lived at <code>10.0.40.50</code>, and the campus routers sent logs to it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Syslog server: 10.0.40.50
+</span></span><span style="display:flex;"><span>Location: Main Campus server VLAN
+</span></span><span style="display:flex;"><span>Service: Ubuntu rsyslog
+</span></span><span style="display:flex;"><span>Purpose: Central log collection from campus routers
+</span></span></code></pre></div><p>The router-side configuration was simple, but useful:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>logging host 10.0.40.50
+</span></span><span style="display:flex;"><span>logging origin-id hostname
+</span></span></code></pre></div><p>That gave the design operational visibility instead of making every router its own isolated source of truth.</p>
+<details>
+<summary>Why I replaced the original syslog node</summary>
+<p>The original CML syslog appliance looked like the easiest path at first, but it was not behaving reliably with the customization I needed. Rather than keep forcing the wrong tool into the design, I replaced it with an Ubuntu server running <code>rsyslog</code>.</p>
+<p>That was a better engineering decision.</p>
+<p>The requirement was centralized logging, not loyalty to a specific appliance image.</p>
+</details>
+<p>This was also a good example of implementation flexibility. In real projects, the first tool you pick is not always the one you keep. What matters is whether the requirement is still met.</p>
+<p>In this case, it was.</p>
+<hr>
+<h2 id="wan-impairment-testing">WAN Impairment Testing</h2>
+<p>The WAN simulator nodes were what tied the project back to the SD-WAN idea.</p>
+<p>Each branch had one simulated WAN circuit back to Main Campus. I tested the environment under normal conditions, degraded conditions, failure, and restoration. I originally had separate screenshots for each phase, but that felt heavy for a blog post. The behavior is easier to understand in a small table and a few command-style notes.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Test</th>
+          <th>WAN Condition</th>
+          <th>Expected Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Baseline</td>
+          <td>No impairment</td>
+          <td>Normal reachability</td>
+      </tr>
+      <tr>
+          <td>Degraded</td>
+          <td>Latency, jitter, loss, reduced bandwidth</td>
+          <td>Higher response times and less reliable service access</td>
+      </tr>
+      <tr>
+          <td>Failure</td>
+          <td>100% packet loss</td>
+          <td>Branch loses reachability over that WAN path</td>
+      </tr>
+      <tr>
+          <td>Restoration</td>
+          <td>Impairment removed</td>
+          <td>Reachability returns</td>
+      </tr>
+  </tbody>
+</table>
+<p>For the degraded test, I added latency, jitter, packet loss, and reduced throughput. The result was visible in the ping behavior and helped show how the topology responded when the transport was no longer clean.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Baseline:
+</span></span><span style="display:flex;"><span>latency: 0 ms
+</span></span><span style="display:flex;"><span>jitter: 0 ms
+</span></span><span style="display:flex;"><span>loss: 0%
+</span></span><span style="display:flex;"><span>bandwidth: unrestricted / high
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Degraded:
+</span></span><span style="display:flex;"><span>latency: 80 ms
+</span></span><span style="display:flex;"><span>jitter: 20 ms
+</span></span><span style="display:flex;"><span>loss: 2%
+</span></span><span style="display:flex;"><span>bandwidth: reduced
+</span></span></code></pre></div><p>For failure testing, I used 100% packet loss. Then I restored the WAN simulator settings and showed connectivity returning.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Failure state:
+</span></span><span style="display:flex;"><span>WAN simulator set to 100% packet loss
+</span></span><span style="display:flex;"><span>Branch-to-main reachability fails
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Restored state:
+</span></span><span style="display:flex;"><span>WAN simulator impairment removed
+</span></span><span style="display:flex;"><span>Branch-to-main reachability returns
+</span></span></code></pre></div><details>
+<summary>What this did and did not prove</summary>
+<p>This demonstrated WAN impairment, failure, and restoration behavior.</p>
+<p>It did not demonstrate automatic failover.</p>
+<p>Each branch only had one simulated WAN path back to Main Campus, so there was nowhere else for traffic to go during a failure. That was intentional scope control. A full redundant SD-WAN design would need additional circuits, routing policy, and failover validation.</p>
+</details>
+<p>I was very careful in the report not to call this automatic failover. It was not. The honest claim was that the lab demonstrated WAN impairment behavior, not redundant path steering.</p>
+<p>That distinction was important.</p>
+<p>It is easy to make a project sound more impressive by overstating it. I wanted the final report to be technically honest. It was a proof of concept, not a production SD-WAN fabric.</p>
+<hr>
+<h2 id="the-sd-wan-controller-rabbit-hole">The SD-WAN Controller Rabbit Hole</h2>
+<p>After the capstone was submitted, I started playing with the actual Cisco SD-WAN controller stack in the same general topology. I powered on SD-WAN Manager, SD-WAN Controller, and SD-WAN Validator, connected them through a management switch, and started trying to bring the control plane up.</p>
+<p>That quickly reminded me why I kept the controller-based SD-WAN architecture as future-state only in the report.</p>
+<p>The Manager was resource-heavy. The backend services were slow to initialize. The configuration database did not start cleanly at first. The web UI came up, but the backend was not ready. Certificates and onboarding were clearly going to be their own project.</p>
+<p>That did not make the SD-WAN work impossible, but it did validate the scope decision.</p>
+<p>A full controller-based SD-WAN deployment is not just “add three nodes.” It is its own environment, with its own lifecycle, trust model, resource needs, and operational requirements.</p>
+<details>
+<summary>What was implemented versus future-state</summary>
+<p>Implemented in the capstone:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Routed multi-site WAN foundation
+</span></span><span style="display:flex;"><span>eBGP route exchange
+</span></span><span style="display:flex;"><span>VLAN segmentation
+</span></span><span style="display:flex;"><span>Centralized DNS/DHCP
+</span></span><span style="display:flex;"><span>Internal web service
+</span></span><span style="display:flex;"><span>Syslog visibility
+</span></span><span style="display:flex;"><span>Guest isolation
+</span></span><span style="display:flex;"><span>WAN impairment testing
+</span></span></code></pre></div><p>Future-state only:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>SD-WAN Manager
+</span></span><span style="display:flex;"><span>SD-WAN Controller
+</span></span><span style="display:flex;"><span>SD-WAN Validator
+</span></span><span style="display:flex;"><span>Edge onboarding
+</span></span><span style="display:flex;"><span>Certificates
+</span></span><span style="display:flex;"><span>Templates
+</span></span><span style="display:flex;"><span>Full controller-based policy
+</span></span></code></pre></div><p>The capstone proved the network foundation. The controller stack would be a separate project.</p>
+</details>
+<p>For the capstone, the right decision was to show the future-state controller architecture without pretending it was implemented.</p>
+<p>That might sound less flashy, but I think it made the project stronger. The scope was honest, and the evidence matched the claims.</p>
+<hr>
+<h2 id="using-the-capstone-in-an-interview">Using the Capstone in an Interview</h2>
+<p>One of the coolest parts of this project was that I got to talk about it in a job interview.</p>
+<p>It came up naturally, and it immediately made the conversation more concrete. I was not just saying that I understood routing, segmentation, or WAN design. I was able to talk about something I had actually built.</p>
+<p>I could explain why I chose BGP instead of OSPF. I could describe how the VLANs were structured. I could talk through DHCP relay, dnsmasq behavior, syslog replacement, guest ACLs, WAN impairment, and the difference between a proof of concept and a full SD-WAN deployment.</p>
+<p>That gave the conversation a lot more weight.</p>
+<p>It lent credibility to my knowledge outside of school because I was not just repeating terms from a textbook. I had configuration decisions, failures, fixes, and evidence. I had a topology I could reason through.</p>
+<p>That matters.</p>
+<p>A degree checks a box, but a project gives you something to talk about.</p>
+<hr>
+<h2 id="what-i-took-away">What I Took Away</h2>
+<p>This project reinforced something I have been learning over and over again: good networking work is rarely about a single technology.</p>
+<p>The project had BGP, but it was not just a BGP project.</p>
+<p>It had VLANs, but it was not just a switching project.</p>
+<p>It had syslog, but it was not just a logging project.</p>
+<p>It had WAN simulators, but it was not a full SD-WAN project.</p>
+<p>The value came from how all of those pieces fit together. Routing, segmentation, services, visibility, and validation all had to support the same design.</p>
+<p>It also reminded me that documentation is part of the engineering work. The lab had to function, but the report had to prove that it functioned. Screenshots had to match captions. Claims had to be accurate. Scope had to be clear. If the evidence did not support the statement, the statement needed to change.</p>
+<p>That kind of discipline matters in the workforce too.</p>
+<p>And that ended up being more than theoretical. The capstone came up during a job interview, and being able to talk through a project I actually built gave the conversation a lot more weight. I was not just describing concepts from school. I was explaining real design decisions, failure points, troubleshooting steps, and validation evidence.</p>
+<p>That interview turned into an offer, and I accepted it.</p>
+<p>So in a very real way, this project helped bridge the gap between school, lab work, and the next stage of my career.</p>
+<hr>
+<h2 id="why-this-was-worth-doing">Why This Was Worth Doing</h2>
+<p>I chose the BSIT at WGU partly because I wanted room to shape the degree around the kind of work I actually care about. This capstone gave me that room.</p>
+<p>It let me take a general IT requirement and turn it into a network engineering project with real routing, segmentation, centralized services, logging, and WAN behavior testing.</p>
+<p>It was not perfect.</p>
+<p>It was not production.</p>
+<p>It was not a full Cisco SD-WAN deployment.</p>
+<p>But it was real enough to troubleshoot, real enough to document, and real enough to discuss with engineers outside of school.</p>
+<p>That is what made it worthwhile.</p>
+<p>It also came at an interesting transition point for me. A lot of my technical growth so far has centered around route/switch, campus networking, infrastructure fundamentals, and security-minded segmentation. That foundation is not going away, but my next professional chapter is going to push me into a new area: <code>VoIP</code>.</p>
+<p>I will be breaking into the voice world, and I am genuinely excited for it.</p>
+<p>Routing and switching still matter there. Maybe more than people realize. Voice is not magic; it still rides on networks, depends on QoS, relies on clean routing, and breaks in very network-engineering ways. But it also brings a whole new layer of technologies and design considerations that I have been studying ahead of my start date.</p>
+<p>I have been digging into things like <code>CUCM</code>, dial plans, route patterns, translation patterns, SIP trunks, <code>Cisco Expressway</code>, <code>CUBE</code>, codec negotiation, call routing, and how voice traffic moves between internal systems, carriers, and remote users.</p>
+<p>It is a pivot, but not a reset.</p>
+<p>It feels more like expanding the map.</p>
+<hr>
+<h2 id="whats-next">What’s Next</h2>
+<p>The next chapter is VoIP.</p>
+<p>I still want to revisit SD-WAN eventually, but right now my focus is shifting toward the technologies I will be working with professionally: Cisco Unified Communications Manager, dial plans, Expressway, CUBE, SIP, voice gateways, and the operational side of keeping real-time communications healthy.</p>
+<p>That is going to mean a lot of learning.</p>
+<p>It will probably mean a lot of labbing too.</p>
+<p>I expect the blog to start reflecting that shift. There will still be route/switch content, because that foundation is not going anywhere, but I want to start documenting the voice side as I learn it. CUCM notes, dial plan concepts, SIP troubleshooting, CUBE behavior, Expressway architecture, and whatever else I run into along the way.</p>
+<p>For now, I am happy with where the capstone landed.</p>
+<p>It gave me a complete story: school, lab, troubleshooting, documentation, an interview talking point, and now a bridge into a new role.</p>
+<p>Not bad for a final project.</p>
+<hr>
+<p>Thanks for reading, and God bless.</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://hoody.cx/images/rice.svg" alt="Logo">
+<h1 class="about__title">tox@box</h1>
+<p class="about__description">An <a href="https://www.linkedin.com/in/damon-hoody/">aspiring network engineer</a> seeking growth, purpose, and life anchored in Christ.</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://www.linkedin.com/in/damon-hoody/" rel="me" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://infosec.exchange/@toxbox" rel="me" aria-label="Mastodon" title="Mastodon"><i class="fa-brands fa-mastodon" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://github.com/pwnedbytoxic" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://tryhackme.com/p/toxic.sec" rel="me" aria-label="TryHackMe" title="TryHackMe"><i class="fa fa-flag" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2026-05-28
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      
+          
+            
+            
+                <br/><span class="active">$ echo $LANG<br/><b></b></span><br/>
+
+            
+          
+      
+    
+</p>
+<br /><br />
+<p class="copyright"></p>
+<p class="advertisement">// made by tox //</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

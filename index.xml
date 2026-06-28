@@ -6,8 +6,15 @@
     <description>Recent content on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Mar 2026 05:52:30 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2026 14:26:25 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My WGU Capstone: Building a Multi-Site Campus Network in Cisco CML</title>
+      <link>https://hoody.cx/posts/wgucapstone/</link>
+      <pubDate>Thu, 28 May 2026 14:26:25 -0400</pubDate>
+      <guid>https://hoody.cx/posts/wgucapstone/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://hoody.cx/gtcc-capstone-topology.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;It’s finally done.&lt;/p&gt;&#xA;&lt;p&gt;After months of coursework, labbing, troubleshooting, rewriting, and second-guessing my own topology, I finished my WGU capstone. Not just in the sense that I turned in a paper, but in the sense that I built something I could actually explain, defend, and use as a real talking point.&lt;/p&gt;&#xA;&lt;p&gt;The project was a secure multi-site campus network proof of concept for a fictional school I called &lt;strong&gt;Greenfield Technical Community College&lt;/strong&gt;. The goal was to design and validate a modernized WAN and campus network model for a Main Campus, a Health Sciences branch, and an Admin/Training branch. It was built in Cisco Modeling Labs using CAT8000V routers, IOL-L2 switches, WAN simulator nodes, centralized services, BGP, VLAN segmentation, ACLs, DHCP relay, DNS, syslog, and a small internal web service.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>From EVPN to Emulation: What I&#39;ve Been doing at WGU</title>
       <link>https://hoody.cx/posts/newyear26/</link>
