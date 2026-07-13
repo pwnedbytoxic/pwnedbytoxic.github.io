@@ -6,8 +6,15 @@
     <description>Recent content in Posts on tox@box</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 May 2026 14:26:25 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 01:16:54 -0400</lastBuildDate>
     <atom:link href="https://hoody.cx/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>College Graduation &amp; Getting Into Cisco Voice</title>
+      <link>https://hoody.cx/posts/summer26/</link>
+      <pubDate>Mon, 13 Jul 2026 01:16:54 -0400</pubDate>
+      <guid>https://hoody.cx/posts/summer26/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://hoody.cx/wgu-graduation-2026.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;It has been a busy couple of months since finishing my capstone.&lt;/p&gt;&#xA;&lt;p&gt;I officially graduated from Western Governors University with my B.S. in Information Technology, and I also started a new position as a &lt;code&gt;Network Support Specialist at NEOnet&lt;/code&gt;. The capstone ended up being a fitting final project for the degree; I built a multi-site campus network, discussed it during my interview, and then moved into a position where I am now supporting network infrastructure professionally.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My WGU Capstone: Building a Multi-Site Campus Network in Cisco CML</title>
       <link>https://hoody.cx/posts/wgucapstone/</link>
